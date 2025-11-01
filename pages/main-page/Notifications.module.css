@@ -1,0 +1,78 @@
+.notificationsContainer {
+    background: #F9FAFB;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .contentWrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  
+  .notificationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .notificationCard {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notificationContent h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.75rem;
+  }
+  
+  .description {
+    color: #4B5563;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+  }
+  
+  .community {
+    color: #6B7280;
+    margin-bottom: 1.25rem;
+    font-size: 0.9375rem;
+  }
+  
+  .notificationActions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .contentWrapper {
+      padding: 0 1rem;
+    }
+  
+    .notificationCard {
+      padding: 1.5rem;
+    }
+  
+    .notificationActions {
+      flex-direction: column;
+    }
+  
+    .notificationActions button {
+      width: 100%;
+    }
+  }

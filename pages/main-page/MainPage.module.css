@@ -1,0 +1,306 @@
+.mainContainer {
+    background: #F0F0FF;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .contentWrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  /* Feed Header */
+  .feedHeader {
+    margin-bottom: 2rem;
+  }
+  
+  .feedHeader h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 2px solid #E5E7EB;
+  }
+  
+  .tabs button {
+    background: none;
+    border: none;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6B7280;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  
+  .tabs button:hover {
+    color: #111827;
+  }
+  
+  .tabs button.activeTab {
+    color: #111827;
+  }
+  
+  .tabs button.activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #111827;
+  }
+  
+  /* Feed Posts */
+  .feedPosts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* Large Post Card */
+  .postCardLarge {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .postHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .postAuthor {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .authorAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .authorAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .authorInfo h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.125rem;
+  }
+  
+  .authorInfo span {
+    font-size: 0.875rem;
+    color: #6B7280;
+  }
+  
+  .timeAgo {
+    font-size: 0.875rem;
+    color: #9CA3AF;
+  }
+  
+  .postTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .postContent {
+    color: #4B5563;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+  }
+  
+  .postImage {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .postImage img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .postActions {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #E5E7EB;
+  }
+  
+  .actionBtn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6B7280;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .actionBtn:hover {
+    color: #111827;
+  }
+  
+  .actionBtn span {
+    font-size: 1.125rem;
+  }
+  
+  /* Small Post Cards Grid - 2 columns */
+  .postCardsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .postCardSmall {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .smallPostContent {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .smallPostText {
+    flex: 1;
+  }
+  
+  .smallPostImage {
+    width: 150px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .smallPostImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Three Columns Grid */
+  .postCardsGridThree {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .postTitleSmall {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .postImageSmall {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    height: 150px;
+  }
+  
+  .postImageSmall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .postContentSmall {
+    color: #4B5563;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Horizontal Post Card */
+  .postCardHorizontal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .horizontalContent {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .horizontalText {
+    flex: 1;
+  }
+  
+  .horizontalImage {
+    width: 250px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .horizontalImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Responsive */
+  @media (max-width: 968px) {
+    .contentWrapper {
+      padding: 0 1rem;
+    }
+  
+    .postCardsGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .postCardsGridThree {
+      grid-template-columns: 1fr;
+    }
+  
+    .smallPostContent {
+      flex-direction: column;
+    }
+  
+    .smallPostImage {
+      width: 100%;
+      height: 200px;
+    }
+  }

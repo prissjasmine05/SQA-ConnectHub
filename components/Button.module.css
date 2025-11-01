@@ -1,0 +1,87 @@
+.button {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Variants */
+  .primary {
+    background: linear-gradient(to right, #9333EA, #4F46E5);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(147, 51, 234, 0.25);
+  }
+  
+  .primary:hover:not(:disabled) {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.35);
+  }
+  
+  .primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  .secondary {
+    background: transparent;
+    color: #9333EA;
+    border: 2px solid #9333EA;
+  }
+  
+  .secondary:hover:not(:disabled) {
+    background: linear-gradient(to right, #9333EA, #4F46E5);
+    color: #fff;
+    border-color: transparent;
+  }
+  
+  .outline {
+    background: transparent;
+    color: #333;
+    border: 2px solid #E5E7EB;
+  }
+  
+  .outline:hover:not(:disabled) {
+    border-color: #9333EA;
+    color: #9333EA;
+  }
+  
+  .danger {
+    background: linear-gradient(to right, #DC2626, #EF4444);
+    color: #fff;
+  }
+  
+  .danger:hover:not(:disabled) {
+    filter: brightness(0.9);
+  }
+  
+  /* Sizes */
+  .small {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .medium {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+  }
+  
+  .large {
+    padding: 1rem 2.5rem;
+    font-size: 1.0625rem;
+  }
+  
+  /* Full Width */
+  .fullWidth {
+    width: 100%;
+  }
