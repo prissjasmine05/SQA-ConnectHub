@@ -116,3 +116,10 @@
       display: none;
     }
   }
+
+  /* Auth Buttons (pakai Button component) */
+.authButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }

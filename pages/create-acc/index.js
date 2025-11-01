@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Button from '../../components/Button';
 import styles from './CreateAccount.module.css';
@@ -8,7 +9,8 @@ import styles from './CreateAccount.module.css';
 export default function CreateAccount() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState('login'); // 'login', 'signup', 'interests'
-  
+  const [searchTerm, setSearchTerm] = useState('');     
+
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
@@ -58,20 +60,38 @@ export default function CreateAccount() {
     router.push('/main-page');
   };
 
+  const filteredInterests = interests.filter(i =>
+    i.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <Head>
         <title>Create Account - ConnectHub</title>
       </Head>
 
-      <div className={styles.container}>
+      {/* Tambah modifier styles.fullPage saat step interests */}
+      <div
+  className={[
+    styles.container,
+    currentStep === 'interests' ? styles.fullPage : ''
+  ].join(' ')}
+  data-step={currentStep} // buat debug di DevTools
+>
         {/* Left Form Section */}
         <div className={styles.leftSection}>
           <div className={styles.formWrapper}>
             {/* Logo */}
             <div className={styles.logo}>
-              <span className={styles.logoIcon}>■</span>
-              <span className={styles.logoText}>ConnectHub</span>
+              <Link href="/">
+                <Image
+                  src="/images/LogoConnectHub.png"
+                  alt="ConnectHub"
+                  width={150}
+                  height={40}
+                  priority
+                />
+              </Link>
             </div>
 
             {currentStep === 'login' && (
@@ -109,16 +129,7 @@ export default function CreateAccount() {
                   </Button>
                 </form>
 
-                <div className={styles.orDivider}>
-                  <span>or</span>
-                </div>
-
-                <div className={styles.socialLogin}>
-                  <button className={styles.socialBtn}>
-                    <span className={styles.googleIcon}>G</span>
-                    Continue with Google
-                  </button>
-                </div>
+                
               </div>
             )}
 
@@ -179,37 +190,38 @@ export default function CreateAccount() {
                   </Button>
                 </form>
 
-                <div className={styles.orDivider}>
-                  <span>or</span>
-                </div>
-
-                <div className={styles.socialLogin}>
-                  <button className={styles.socialBtn}>
-                    <span className={styles.googleIcon}>G</span>
-                    Continue with Google
-                  </button>
-                </div>
               </div>
             )}
 
-            {currentStep === 'interests' && (
+{currentStep === 'interests' && (
               <div className={styles.interestsContent}>
                 <div className={styles.interestsHeader}>
                   <h1>What are you interested in?</h1>
                   <p>Choose your interest to get personalized content</p>
+
+                  {/* Search bar */}
+                  <div className={styles.searchBar}>
+                    <span className={styles.searchIcon}>⌕</span>
+                    <input
+                      type="text"
+                      placeholder="Search"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <div className={styles.interestsGrid}>
-                  {interests.map((interest) => (
+                  {filteredInterests.map((interest) => (
                     <div
                       key={interest.id}
                       className={`${styles.interestCard} ${selectedInterests.includes(interest.id) ? styles.selected : ''}`}
                       onClick={() => toggleInterest(interest.id)}
                     >
-                      <img src={interest.image} alt={interest.name} />
-                      <div className={styles.interestOverlay}>
-                        <span>{interest.name}</span>
+                      <div className={styles.interestThumb}>
+                        <img src={interest.image} alt={interest.name} />
                       </div>
+                      <div className={styles.interestLabel}>{interest.name}</div>
                       {selectedInterests.includes(interest.id) && (
                         <div className={styles.checkmark}>✓</div>
                       )}
@@ -227,10 +239,10 @@ export default function CreateAccount() {
           </div>
         </div>
 
-        {/* Right Image Section */}
+        {/* Right Image Section — otomatis tersembunyi saat fullPage */}
         <div className={styles.rightSection}>
           <img 
-            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1000" 
+            src="https://www.storable.com/wp-content/uploads/2025/02/Storable_Team.png" 
             alt="Community" 
           />
         </div>

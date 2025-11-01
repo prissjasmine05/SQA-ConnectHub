@@ -1,11 +1,41 @@
+// components/Navbar.js
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Button from './Button';
 import styles from './Navbar.module.css';
 
-export default function Navbar({ isLoggedIn = false }) {
+export default function Navbar({ isLoggedIn = false, variant = 'default' }) {
   const router = useRouter();
 
+  // ====== Landing (minimal) ======
+  if (variant === 'landing') {
+    return (
+      <nav className={styles.navbar}>
+        <div className={styles.container}>
+          {/* Logo kiri */}
+          <Link href="/" className={styles.logo} aria-label="ConnectHub">
+            <Image 
+              src="/images/LogoConnectHub.png" 
+              alt="ConnectHub Logo" 
+              width={150}
+              height={40}
+              priority
+            />
+          </Link>
+
+          {/* Tombol kanan: Register / Login */}
+          <div className={styles.authButtons}>
+            <Link href="/create-acc">
+              <Button size="medium">Register / Login</Button>
+            </Link>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+
+  // ====== Default (tetap ada bila dipakai di halaman lain) ======
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
@@ -20,10 +50,8 @@ export default function Navbar({ isLoggedIn = false }) {
           />
         </Link>
         
-        {/* Navigation - Different for logged in/out */}
         {isLoggedIn ? (
           <>
-            {/* Logged In Navigation */}
             <ul className={styles.navLinks}>
               <li>
                 <Link href="/main-page" className={router.pathname === '/main-page' ? styles.active : ''}>
@@ -47,7 +75,6 @@ export default function Navbar({ isLoggedIn = false }) {
               </li>
             </ul>
 
-            {/* User Profile */}
             <div className={styles.userProfile}>
               <div className={styles.avatar}>
                 <img src="https://i.pravatar.cc/150?img=5" alt="User" />
@@ -56,7 +83,7 @@ export default function Navbar({ isLoggedIn = false }) {
           </>
         ) : (
           <>
-            {/* Logged Out Navigation */}
+            {/* (opsi lama non-landing) */}
             <ul className={styles.navLinks}>
               <li>
                 <Link href="/" className={router.pathname === '/' ? styles.active : ''}>
@@ -70,13 +97,9 @@ export default function Navbar({ isLoggedIn = false }) {
               </li>
             </ul>
 
-            {/* Auth Buttons */}
             <div className={styles.authButtons}>
-              <Link href="/register" className={styles.btnRegister}>
-                Register
-              </Link>
-              <Link href="/create-acc" className={styles.btnLogin}>
-                Login
+              <Link href="/create-acc">
+                <Button size="medium">Register / Login</Button>
               </Link>
             </div>
           </>

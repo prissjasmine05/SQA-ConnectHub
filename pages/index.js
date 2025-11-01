@@ -1,3 +1,4 @@
+// pages/index.js
 import Head from 'next/head';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
@@ -13,7 +14,8 @@ export default function Home() {
         <meta name="description" content="Platform untuk menghubungkan komunitas dan event terbaik" />
       </Head>
 
-      <Navbar isLoggedIn={false} />
+      {/* gunakan variant="landing" agar navbar hanya logo + tombol auth */}
+      <Navbar isLoggedIn={false} variant="landing" />
 
       <main className={styles.main}>
         {/* Hero Section */}
@@ -25,9 +27,7 @@ export default function Home() {
               <Link href="/create-acc">
                 <Button variant="primary" size="large">Get Started</Button>
               </Link>
-              <Link href="/main-page">
-                <Button variant="secondary" size="large">Explore Events</Button>
-              </Link>
+              {/* Explore Events dihapus sesuai permintaan */}
             </div>
           </div>
           <div className={styles.heroImage}>
@@ -64,7 +64,7 @@ export default function Home() {
         <section className={styles.cta}>
           <h2>Ready to Get Started?</h2>
           <p>Join thousands of communities today</p>
-          <Link href="/register">
+          <Link href="/create-acc">
             <Button variant="primary" size="large">Create Your Account</Button>
           </Link>
         </section>

@@ -18,16 +18,7 @@ export default function Footer() {
             <p>Platform untuk menghubungkan komunitas dan event terbaik</p>
           </div>
 
-          {/* Quick Links */}
-          <div className={styles.footerLinks}>
-            <h4>Quick Links</h4>
-            <ul>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/main-page">Explore</Link></li>
-              <li><Link href="/community-profile">Community</Link></li>
-              <li><Link href="/create-event">Create Event</Link></li>
-            </ul>
-          </div>
+          
 
           {/* Support */}
           <div className={styles.footerLinks}>

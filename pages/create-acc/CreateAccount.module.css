@@ -1,3 +1,4 @@
+/* ========== LAYOUT DASAR ========== */
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -26,18 +27,10 @@
     margin-bottom: 3rem;
   }
   
-  .logoIcon {
-    width: 24px;
-    height: 24px;
-    background: #000;
-    display: block;
-  }
-  
-  .logoText {
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: #000;
-    letter-spacing: -0.02em;
+  /* (opsional) memastikan tinggi logo konsisten untuk <Image/> Next */
+  .logo :global(img) {
+    height: 40px;
+    width: auto;
   }
   
   /* Form Content */
@@ -103,80 +96,11 @@
     color: #9CA3AF;
   }
   
-  /* OR Divider */
-  .orDivider {
-    text-align: center;
-    margin: 1.5rem 0;
-    position: relative;
-    color: #9CA3AF;
-    font-size: 0.875rem;
-  }
-  
-  .orDivider::before,
-  .orDivider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 42%;
-    height: 1px;
-    background: #E5E7EB;
-  }
-  
-  .orDivider::before {
-    left: 0;
-  }
-  
-  .orDivider::after {
-    right: 0;
-  }
-  
-  /* Social Login */
-  .socialLogin {
-    margin-bottom: 1rem;
-  }
-  
-  .socialBtn {
-    width: 100%;
-    padding: 0.875rem;
-    border: 1px solid #D1D5DB;
-    border-radius: 8px;
-    background: #fff;
-    cursor: pointer;
-    font-weight: 600;
-    color: #374151;
-    font-size: 0.9375rem;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-  
-  .socialBtn:hover {
-    border-color: #9333EA;
-    background: #F9FAFB;
-  }
-  
-  .googleIcon {
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(to right, #9333EA, #4F46E5);
-    color: #fff;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.75rem;
-  }
-  
-  /* Interests Page */
-  .interestsContent {
-    width: 100%;
-  }
+  /* ====== Interests Page (default) ====== */
+  .interestsContent { width: 100%; }
   
   .interestsHeader {
-    text-align: right;
+    text-align: right; /* akan ditimpa saat fullPage */
     margin-bottom: 2rem;
   }
   
@@ -192,6 +116,7 @@
     font-size: 0.9rem;
   }
   
+  /* Default grid (akan ditimpa saat fullPage) */
   .interestsGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -199,48 +124,51 @@
     margin-bottom: 2rem;
   }
   
+  /* Kartu versi baru (gambar + label bawah) */
   .interestCard {
-    aspect-ratio: 1;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
     position: relative;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    cursor: pointer;
   }
   
   .interestCard:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.10);
   }
   
   .interestCard.selected {
     border-color: #9333EA;
-    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+    box-shadow: 0 8px 24px rgba(147,51,234,0.18);
   }
   
-  .interestCard img {
+  .interestThumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  
+  .interestThumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
   
-  .interestOverlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-    padding: 0.75rem 0.5rem;
-    color: #fff;
+  .interestLabel {
+    padding: 10px 12px 14px;
     font-weight: 600;
-    font-size: 0.875rem;
-    text-align: center;
+    color: #111827;
+    text-align: left;
   }
   
   .checkmark {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 10px;
+    right: 10px;
     width: 28px;
     height: 28px;
     background: #9333EA;
@@ -255,7 +183,7 @@
   
   .interestsFooter {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* akan ditengah saat fullPage */
   }
   
   /* Right Section - Image */
@@ -270,37 +198,84 @@
     object-fit: cover;
   }
   
-  /* Responsive */
+  /* ========== FULL PAGE MODE UNTUK STEP "INTERESTS" ========== */
+  .fullPage {
+    grid-template-columns: 1fr; /* jadi satu kolom penuh */
+    background: linear-gradient(180deg, #F0F0FF 0%, #FFFFFF 100%);
+  }
+  
+  .fullPage .rightSection { display: none; }
+  
+  .fullPage .leftSection {
+    background: transparent;
+    padding: 2.5rem 0 2.75rem;
+  }
+  
+  .fullPage .formWrapper { max-width: 1100px; }
+  
+  .fullPage .interestsHeader {
+    text-align: center;
+    margin: 0 auto 1.25rem auto;
+  }
+  
+  /* Search bar */
+  .searchBar {
+    margin: 1.25rem auto 0;
+    width: min(820px, 92%);
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    box-shadow: 0 4px 18px rgba(79,70,229,0.06);
+  }
+  
+  .searchIcon {
+    font-size: 18px;
+    color: #9CA3AF;
+    user-select: none;
+  }
+  
+  .searchBar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: #111827;
+  }
+  
+  /* Grid lebih besar & center */
+  .fullPage .interestsGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px;
+    margin: 24px auto 28px;
+    width: min(1100px, 94%);
+  }
+  
+  /* Footer tombol center */
+  .fullPage .interestsFooter {
+    justify-content: center;
+    margin-top: 8px;
+  }
+  
+  /* ========== RESPONSIVE ========== */
   @media (max-width: 1200px) {
-    .interestsGrid {
-      grid-template-columns: repeat(4, 1fr);
-    }
+    .fullPage .interestsGrid { grid-template-columns: repeat(4, 1fr); }
   }
   
   @media (max-width: 968px) {
-    .container {
-      grid-template-columns: 1fr;
-    }
-  
-    .rightSection {
-      display: none;
-    }
-  
-    .interestsGrid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .container { grid-template-columns: 1fr; }
+    .rightSection { display: none; }
+    .fullPage .interestsGrid { grid-template-columns: repeat(3, 1fr); }
   }
   
   @media (max-width: 640px) {
-    .interestsGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .interestsHeader {
-      text-align: center;
-    }
-  
-    .interestsFooter {
-      justify-content: center;
-    }
+    .fullPage .interestsGrid { grid-template-columns: repeat(2, 1fr); }
+    .fullPage .interestsHeader { text-align: center; }
+    .fullPage .interestsFooter { justify-content: center; }
   }
+  
