@@ -1,0 +1,141 @@
+/* ===== Page shell ===== */
+.mainContainer {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #F0F0FF 0%, #FFFFFF 100%);
+  }
+  
+  .contentWrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 56px;
+  }
+  
+  /* ===== Header & Sub Tabs (samain gaya For You Page) ===== */
+  .eventsHeader { margin-bottom: 24px; }
+  
+  .eventsHeader h1 {
+    font-size: 2.5rem;         /* ~40px */
+    line-height: 1.15;
+    font-weight: 800;
+    color: #0B1021;
+    margin-bottom: 12px;       /* spasi judul ke tabs */
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    border-bottom: 1px solid #E5E7EB; /* garis tipis sepanjang konten */
+    padding-bottom: 10px;
+  }
+  
+  .tabs button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #6B7280;
+    padding: 0 0 6px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .tabs button:hover { color: #111827; }
+  
+  .activeTab {
+    color: #000 !important;
+  }
+  .activeTab::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -11px;
+    height: 3px;
+    background: #000;
+    border-radius: 999px;
+  }
+  
+  /* ===== List & Card ===== */
+  .eventsList {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 8px;
+  }
+  
+  .eventCard {
+    display: grid;
+    grid-template-columns: 1fr 320px;  /* teks | gambar kanan */
+    gap: 24px;
+    align-items: center;
+    padding: 18px 8px;
+    border-radius: 16px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  
+  .eventCard:hover { transform: translateY(-2px); }
+  
+  /* ===== Info (kiri) ===== */
+  .eventInfo { display: grid; gap: 8px; }
+  
+  .eventCommunity {
+    font-size: 0.9rem;
+    color: #6B7280;
+  }
+  
+  .eventInfo h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0B1021;
+  }
+  
+  .eventInfo p {
+    color: #4B5563;
+    line-height: 1.6;
+    max-width: 680px;
+    margin-bottom: 6px;
+  }
+  
+  /* --- kecilkan button Join Event --- */
+  /* --- JANGAN full width di grid --- */
+.joinBtn {
+    width: auto !important;      /* kunci */
+    justify-self: start;         /* ini yang bikin tidak melebar di CSS grid */
+    margin-top: 6px;
+  }
+  
+  /* optional: rapikan kolom kiri agar nggak ‘narik’ child */
+  .eventInfo {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    justify-items: start;        /* semua child default ke start */
+  }
+  
+  
+  /* ===== Image (kanan) ===== */
+  .eventImage {
+    width: 100%;
+    height: 180px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  }
+  
+  .eventImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* ===== Responsive ===== */
+  @media (max-width: 1024px) {
+    .contentWrapper { max-width: 940px; }
+    .eventCard { grid-template-columns: 1fr 280px; }
+    .eventImage { height: 160px; }
+  }
+  @media (max-width: 820px) {
+    .eventCard { grid-template-columns: 1fr; align-items: start; }
+    .eventImage { height: 200px; }
+  }
+  

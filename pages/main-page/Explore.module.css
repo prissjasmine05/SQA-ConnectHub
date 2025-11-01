@@ -1,0 +1,182 @@
+/* ----- Layout inside the shared container ----- */
+.searchBar {
+    position: relative;
+    margin: 16px 0 28px;
+  }
+  
+  .searchBar input {
+    width: 100%;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid #E5E7EB;
+    background: #FFFFFF;
+    padding: 0 16px 0 44px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: box-shadow .2s ease, border-color .2s ease;
+  }
+  
+  .searchBar input:focus {
+    border-color: #C7B8FF;
+    box-shadow: 0 6px 22px rgba(108,99,255,.12);
+  }
+  
+  .searchIcon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .6;
+    font-size: 1rem;
+  }
+  
+  .exploreSection {
+    margin: 18px 0 36px;
+  }
+  
+  .exploreSection h2 {
+    font-size: 1.125rem;        /* kecil & rapi seperti referensi */
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 14px;
+  }
+  
+  /* ----- Communities (5 kolom, card kotak, teks di bawah) ----- */
+  .communityGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  
+  .communityCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .communityCard img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #F3F4F6;
+    box-shadow: 0 4px 14px rgba(17,24,39,.06);
+  }
+  
+  .communityInfo h4 {
+    font-size: .95rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 2px;
+  }
+  
+  .communityInfo span {
+    font-size: .82rem;
+    color: #6B7280;
+  }
+  
+  /* ----- Trending Groups (sama tampilan dengan Communities) ----- */
+  .trendingGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  
+  .trendingCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .trendingCard img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(17,24,39,.06);
+  }
+  
+  .trendingInfo h4 {
+    font-size: .95rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 2px;
+  }
+  
+  .trendingInfo span {
+    font-size: .82rem;
+    color: #6B7280;
+  }
+  
+  /* ----- Trending Topics (chips) ----- */
+  .topicsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 16px;
+  }
+  
+  .topicCard {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #111827;
+    background: #F3F4F6; /* ditimpa inline style color pastel */
+    box-shadow: 0 4px 12px rgba(17,24,39,.06);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  
+  .topicCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(17,24,39,.10);
+    filter: brightness(.98);
+  }
+  
+  .topicIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.7);
+    font-size: 0.95rem;
+  }
+  
+  .topicName {
+    font-size: .92rem;
+  }
+  
+  /* ----- Responsive ----- */
+  @media (max-width: 1200px) {
+    .communityGrid,
+    .trendingGrid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 968px) {
+    .communityGrid,
+    .trendingGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .communityGrid,
+    .trendingGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .topicsGrid {
+      gap: 10px 12px;
+    }
+    .topicCard {
+      padding: 10px 12px;
+      border-radius: 10px;
+    }
+  }
+  

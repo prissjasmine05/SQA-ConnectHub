@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
 import styles from './Events.module.css';
+import mainStyles from './MainPage.module.css';   
 
 export default function EventsPage() {
   const events = [
@@ -51,11 +52,11 @@ export default function EventsPage() {
 
       <Navbar isLoggedIn={true} />
 
-      <main className={styles.mainContainer}>
-        <div className={styles.contentWrapper}>
-          <div className={styles.eventsHeader}>
-            <h1>Upcoming Events</h1>
-            <div className={styles.tabs}>
+      <main className={mainStyles.mainContainer}>
+        <div className={mainStyles.contentWrapper}>
+          <div className={mainStyles.feedHeader}>           {/* <- sama persis */}
+           <h1>Upcoming Events</h1>
+           <div className={mainStyles.tabs}>   
               <Link href="/main-page">
                 <button>For you</button>
               </Link>
@@ -63,7 +64,7 @@ export default function EventsPage() {
                 <button>Following</button>
               </Link>
               <Link href="/main-page/events">
-                <button className={styles.activeTab}>Events</button>
+                <button className={mainStyles.activeTab}>Events</button>
               </Link>
             </div>
           </div>
@@ -75,7 +76,9 @@ export default function EventsPage() {
                   <span className={styles.eventCommunity}>{event.community}</span>
                   <h3>{event.title}</h3>
                   <p>{event.description}</p>
-                  <Button variant="primary" size="small">Join Event</Button>
+                  <Button variant="primary" size="small" className={styles.joinBtn}>
+  Join Event
+</Button>
                 </div>
                 <div className={styles.eventImage}>
                   <img src={event.image} alt={event.title} />

@@ -1,23 +1,25 @@
 import styles from './Button.module.css';
 
-export default function Button({ 
-  children, 
-  variant = 'primary', 
+export default function Button({
+  children,
+  variant = 'primary',
   size = 'medium',
   fullWidth = false,
   onClick,
   type = 'button',
-  disabled = false
+  disabled = false,
+  className = ''          // <-- TAMBAH
 }) {
-  const buttonClass = `
-    ${styles.button} 
-    ${styles[variant]} 
-    ${styles[size]} 
-    ${fullWidth ? styles.fullWidth : ''}
-  `.trim();
+  const buttonClass = [
+    styles.button,
+    styles[variant],
+    styles[size],
+    fullWidth ? styles.fullWidth : '',
+    className               // <-- MERGE KELAS TAMBAHAN
+  ].join(' ').trim();
 
   return (
-    <button 
+    <button
       className={buttonClass}
       onClick={onClick}
       type={type}

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../../components/Navbar';
 import styles from './Explore.module.css';
+import mainStyles from './MainPage.module.css';
 
 export default function ExplorePage() {
   const communities = [
@@ -36,8 +37,8 @@ export default function ExplorePage() {
 
       <Navbar isLoggedIn={true} />
 
-      <main className={styles.mainContainer}>
-        <div className={styles.contentWrapper}>
+      <main className={mainStyles.mainContainer}>
+        <div className={mainStyles.contentWrapper}>
           <div className={styles.searchBar}>
             <span className={styles.searchIcon}>🔍</span>
             <input type="text" placeholder="Search interests" />
@@ -64,7 +65,7 @@ export default function ExplorePage() {
               {trendingGroups.map((group) => (
                 <div key={group.id} className={styles.trendingCard}>
                   <img src={group.image} alt={group.name} />
-                  <div className={styles.trendingOverlay}>
+                  <div className={styles.trendingInfo}>
                     <h4>{group.name}</h4>
                     <span>{group.members} members</span>
                   </div>
