@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Button from '../../components/Button';
 import styles from './CreateAccount.module.css';
 
+
 export default function CreateAccount() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState('login'); // 'login', 'signup', 'interests'
@@ -46,19 +47,74 @@ export default function CreateAccount() {
     }
   };
 
-  const handleLoginSubmit = (e) => {
+  // ... atasnya tetap
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setCurrentStep('interests');
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData),
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Login failed');
+  
+      // cek profil
+      const me = await fetch('/api/auth/me', { credentials: 'include' });
+      const { user } = await me.json();
+  
+      if (user?.onboardingCompleted) {
+        router.replace('/main-page');          // SUDAH onboarding -> langsung Home
+      } else {
+        setCurrentStep('interests');           // BELUM onboarding -> tampilkan Interests
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Login gagal');
+    }
   };
-
-  const handleSignupSubmit = (e) => {
+  
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    setCurrentStep('interests');
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(signupData),
+        credentials: 'include'
+      });
+      if (!res.ok) throw new Error('Register failed');
+      // user baru -> langsung ke interests
+      setCurrentStep('interests');
+    } catch (err) {
+      console.error(err);
+      alert('Register gagal');
+    }
   };
-
-  const handleGetStarted = () => {
-    router.push('/main-page');
+  
+  // saat klik Get Started di step interests, simpan interest ke DB (opsional)
+  const handleGetStarted = async () => {
+    try {
+      // Ambil nama interest dari id
+      const picked = interests
+        .filter(i => selectedInterests.includes(i.id))
+        .map(i => i.name);
+  
+      const res = await fetch('/api/user/save-interests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ interests: picked })
+      });
+      if (!res.ok) throw new Error('Failed saving interests');
+      router.replace('/main-page');
+    } catch (err) {
+      console.error(err);
+      alert('Gagal menyimpan minat');
+    }
   };
+  
+  
 
   const filteredInterests = interests.filter(i =>
     i.name.toLowerCase().includes(searchTerm.toLowerCase())
