@@ -1,6 +1,7 @@
 // pages/community-profile/about.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function CommunityAbout() {
   const [activeTab, setActiveTab] = useState('About');
@@ -127,9 +128,11 @@ export default function CommunityAbout() {
         </section>
 
         {/* Edit Button */}
-        <button style={styles.editButton}>
-          Edit
-        </button>
+        <div style={styles.editButtonWrapper}>
+          <Button variant="primary" size="medium" fullWidth>
+            Edit
+          </Button>
+        </div>
       </main>
     </div>
   );
@@ -261,21 +264,7 @@ const styles = {
     lineHeight: '1.6',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
-  editButton: {
-    width: '100%',
-    maxWidth: '540px',
-    margin: '0 auto',
-    display: 'block',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    padding: '14px 24px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  editButtonWrapper: {
     marginTop: '40px',
   },
 };

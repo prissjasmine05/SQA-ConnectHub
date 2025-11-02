@@ -1,6 +1,7 @@
 // pages/community-profile/create-post.js
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Button from '../../components/Button';
 
 export default function CreatePost() {
   const [postContent, setPostContent] = useState('');
@@ -136,9 +137,9 @@ export default function CreatePost() {
             </button>
 
             {/* Post Button */}
-            <button type="submit" style={styles.postButton}>
+            <Button variant="primary" size="medium" fullWidth type="submit">
               Post
-            </button>
+            </Button>
           </form>
         </div>
       </div>
@@ -267,19 +268,6 @@ const styles = {
   actionSubtitle: {
     fontSize: '13px',
     color: '#86868b',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  },
-  postButton: {
-    width: '100%',
-    padding: '16px',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
 };

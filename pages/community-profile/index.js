@@ -1,6 +1,7 @@
 // pages/community-profile/index.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function Community() {
   const [hoveredTab, setHoveredTab] = useState(null);
@@ -27,9 +28,9 @@ export default function Community() {
           <div style={styles.members}>12K members · Public group</div>
 
           <div style={styles.actions}>
-            <button style={styles.joinButton}>
+            <Button variant="primary" size="medium">
               Edit Community
-            </button>
+            </Button>
             <button style={styles.settingsButton}>
               <span>⚙️</span>
             </button>
@@ -241,23 +242,6 @@ const styles = {
     gap: '12px',
     justifyContent: 'center',
     marginBottom: '32px',
-  },
-  joinButton: {
-    backgroundColor: '#6366f1',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    padding: '12px 24px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    transition: 'background-color 0.2s',
-  },
-  joinIcon: {
-    fontSize: '16px',
   },
   settingsButton: {
     backgroundColor: 'white',

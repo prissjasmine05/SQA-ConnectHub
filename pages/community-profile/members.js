@@ -1,6 +1,7 @@
 // pages/community-profile/members.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function CommunityMembers() {
   const [activeTab, setActiveTab] = useState('Members');
@@ -124,7 +125,9 @@ export default function CommunityMembers() {
                   <div style={styles.memberStatus}>{member.status}</div>
                 </div>
               </div>
-              <button style={styles.kickButton}>Kick</button>
+              <Button variant="primary" size="small">
+                Kick
+              </Button>
             </div>
           ))}
         </div>
@@ -263,18 +266,6 @@ const styles = {
   memberStatus: {
     fontSize: '13px',
     color: '#6b7280',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  },
-  kickButton: {
-    padding: '8px 24px',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '20px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
 };

@@ -1,6 +1,7 @@
 // pages/community-profile/mute-block.js
 import { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function MuteBlock() {
   const [mutedMembers, setMutedMembers] = useState([
@@ -72,12 +73,13 @@ export default function MuteBlock() {
                     <div style={styles.memberRole}>{member.role}</div>
                   </div>
                 </div>
-                <button 
-                  style={styles.unmuteBtn}
+                <Button 
+                  variant="primary" 
+                  size="small"
                   onClick={() => handleUnmute(member.id)}
                 >
                   Unmute
-                </button>
+                </Button>
               </div>
             ))}
           </div>
@@ -95,12 +97,13 @@ export default function MuteBlock() {
                     <div style={styles.memberRole}>{member.role}</div>
                   </div>
                 </div>
-                <button 
-                  style={styles.unblockBtn}
+                <Button 
+                  variant="primary" 
+                  size="small"
                   onClick={() => handleUnblock(member.id)}
                 >
                   Unblock
-                </button>
+                </Button>
               </div>
             ))}
           </div>
@@ -227,30 +230,6 @@ const styles = {
     fontSize: '14px',
     color: '#86868b',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-  },
-  unmuteBtn: {
-    padding: '10px 24px',
-    border: 'none',
-    borderRadius: '6px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-  },
-  unblockBtn: {
-    padding: '10px 24px',
-    border: 'none',
-    borderRadius: '6px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
   },
   keywordList: {
     display: 'flex',
