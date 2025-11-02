@@ -1,0 +1,343 @@
+/* ===== Main Container ===== */
+.mainContainer {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ===== Modal Card ===== */
+.modalCard {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ===== Close Button ===== */
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #9CA3AF;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  color: #6B7280;
+}
+
+/* ===== Header ===== */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #F3F4F6;
+  position: sticky;
+  top: 0;
+  background: #FFFFFF;
+  z-index: 5;
+}
+
+.logoIcon {
+  width: 20px;
+  height: 20px;
+  background: #000000;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0B1021;
+}
+
+/* ===== Content ===== */
+.modalContent {
+  padding: 32px;
+}
+
+.modalTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0B1021;
+  margin-bottom: 32px;
+}
+
+/* ===== Total Points Section ===== */
+.totalPointsSection {
+  margin-bottom: 32px;
+}
+
+.pointsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.pointsLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.pointsValue {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0B1021;
+}
+
+.progressBar {
+  width: 100%;
+  height: 10px;
+  background: #E5E7EB;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: #0B1021;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.pointsDescription {
+  font-size: 0.75rem;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* ===== Section ===== */
+.section {
+  margin-bottom: 32px;
+}
+
+.section:last-child {
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0B1021;
+  margin-bottom: 16px;
+}
+
+/* ===== Events List ===== */
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eventItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+
+.eventItemGreen {
+  background: #F0FDF4;
+  border-color: #DCFCE7;
+}
+
+.eventItemPink {
+  background: #FDF2F8;
+  border-color: #FCE7F3;
+}
+
+.eventItemYellow {
+  background: #FEFCE8;
+  border-color: #FEF9C3;
+}
+
+.eventIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.eventIconGreen {
+  background: #BBF7D0;
+}
+
+.eventIconPink {
+  background: #FBCFE8;
+}
+
+.eventIconYellow {
+  background: #FDE68A;
+}
+
+.eventIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.eventIconGreen svg { color: #15803D; }
+.eventIconPink svg { color: #BE185D; }
+.eventIconYellow svg { color: #A16207; }
+
+.eventInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.eventName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0B1021;
+  margin-bottom: 2px;
+}
+
+.eventPoints {
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+/* ===== Vouchers List ===== */
+.vouchersList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.voucherItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.voucherItem:hover {
+  border-color: #C4B5FD;
+  background: #FAF5FF;
+}
+
+.voucherInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.voucherIcon {
+  width: 44px;
+  height: 44px;
+  background: #EDE9FE;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.voucherIcon svg {
+  width: 24px;
+  height: 24px;
+  color: #7C3AED;
+}
+
+.voucherDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.voucherName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0B1021;
+  margin-bottom: 2px;
+}
+
+.voucherCost {
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.claimButton {
+  padding: 8px 16px;
+  background: #7C3AED;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.claimButton:hover {
+  background: #6D28D9;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .modalContent {
+    padding: 24px 20px;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  .totalPointsSection,
+  .section {
+    margin-bottom: 24px;
+  }
+
+  .voucherItem {
+    padding: 12px;
+  }
+
+  .voucherInfo {
+    gap: 10px;
+  }
+
+  .voucherIcon,
+  .eventIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .claimButton {
+    padding: 6px 12px;
+    font-size: 0.688rem;
+  }
+}

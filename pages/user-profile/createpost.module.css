@@ -1,0 +1,257 @@
+/* ===== Main Container ===== */
+.mainContainer {
+  min-height: 100vh;
+  background: #FAFAFA;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+  background: #000000;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #6B7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #111827;
+}
+
+/* ===== Content ===== */
+.content {
+  flex: 1;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Textarea ===== */
+.textareaWrapper {
+  margin-bottom: 24px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 18px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 0.938rem;
+  color: #111827;
+  resize: vertical;
+  transition: all 0.2s;
+  font-family: inherit;
+  line-height: 1.6;
+  background: #FFFFFF;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.textarea::placeholder {
+  color: #9CA3AF;
+}
+
+/* ===== Media Options ===== */
+.mediaOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.mediaButton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mediaButton:hover {
+  border-color: #7C3AED;
+  background: #F9FAFB;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.iconWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconWrapperBlue {
+  background: #EFF6FF;
+}
+
+.iconWrapperPurple {
+  background: #F3E8FF;
+}
+
+.mediaIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.iconBlue {
+  color: #3B82F6;
+}
+
+.iconPurple {
+  color: #A855F7;
+}
+
+.mediaInfo {
+  text-align: left;
+  flex: 1;
+}
+
+.mediaTitle {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.mediaDescription {
+  font-size: 0.813rem;
+  color: #6B7280;
+  line-height: 1.3;
+}
+
+/* ===== Post Button ===== */
+.postButton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  transition: all 0.2s;
+}
+
+.postButton:hover {
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+  transform: translateY(-1px);
+}
+
+.postButton:active {
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 24px;
+  }
+
+  .content {
+    padding: 32px 24px 80px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .textarea {
+    min-height: 140px;
+    padding: 16px;
+  }
+
+  .mediaOptions {
+    gap: 12px;
+  }
+
+  .mediaButton {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mediaIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mediaTitle {
+    font-size: 0.875rem;
+  }
+
+  .mediaDescription {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .mediaOptions {
+    grid-template-columns: 1fr;
+  }
+}

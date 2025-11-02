@@ -1,0 +1,283 @@
+/* ===== Main Container ===== */
+.mainContainer {
+  min-height: 100vh;
+  background: #F5F3FF;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+  background: #000000;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #6B7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #111827;
+}
+
+/* ===== Content ===== */
+.content {
+  flex: 1;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Profile Picture Section ===== */
+.profilePictureSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.profileImageWrapper {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pictureLabel {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.pictureHint {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin-bottom: 16px;
+}
+
+.uploadButton {
+  padding: 10px 24px;
+  background: #7C3AED;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.uploadButton:hover {
+  background: #6D28D9;
+}
+
+/* ===== Form ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.938rem;
+  color: #111827;
+  background: #FFFFFF;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.input::placeholder {
+  color: #D1D5DB;
+}
+
+.passwordGroup {
+  position: relative;
+}
+
+.changePasswordButton {
+  background: none;
+  border: none;
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-top: 8px;
+  align-self: flex-end;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.changePasswordButton:hover {
+  background: #F3F4F6;
+}
+
+/* ===== Actions ===== */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.saveButton {
+  width: 100%;
+  padding: 14px;
+  background: #7C3AED;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.saveButton:hover {
+  background: #6D28D9;
+}
+
+.divider {
+  text-align: center;
+  color: #9CA3AF;
+  font-size: 0.875rem;
+  margin: 4px 0;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 14px;
+  background: #F3F4F6;
+  color: #111827;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logoutButton:hover {
+  background: #E5E7EB;
+}
+
+.contingentLink {
+  background: none;
+  border: none;
+  color: #6B7280;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 8px;
+  margin-top: 8px;
+  text-align: center;
+  transition: color 0.2s;
+  text-decoration: underline;
+}
+
+.contingentLink:hover {
+  color: #111827;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 24px;
+  }
+
+  .content {
+    padding: 32px 24px 80px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    margin-bottom: 32px;
+  }
+
+  .profileImageWrapper {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .actions {
+    margin-top: 24px;
+  }
+}

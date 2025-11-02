@@ -75,10 +75,13 @@ export default function Navbar({ isLoggedIn = false, variant = 'default' }) {
               </li>
             </ul>
 
+            {/* Avatar yang bisa diklik menuju profil */}
             <div className={styles.userProfile}>
-              <div className={styles.avatar}>
-                <img src="https://i.pravatar.cc/150?img=5" alt="User" />
-              </div>
+              <Link href="/user-profile">
+                <div className={styles.avatar}>
+                  <img src="https://i.pravatar.cc/150?img=5" alt="User" />
+                </div>
+              </Link>
             </div>
           </>
         ) : (

@@ -1,0 +1,314 @@
+/* ===== Main Container ===== */
+.mainContainer {
+  min-height: 100vh;
+  background: #E8E4F3;
+}
+
+/* ===== Modal Card ===== */
+.modalCard {
+  background: #E8E4F3;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== Close Button ===== */
+.closeButton {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #6B7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  color: #111827;
+}
+
+/* ===== Header ===== */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 48px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+  background: #000000;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== Content ===== */
+.modalContent {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 56px 40px 100px;
+}
+
+.modalTitle {
+  font-size: 2.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Search Container ===== */
+.searchContainer {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9CA3AF;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 16px 20px 16px 52px;
+  font-size: 0.938rem;
+  color: #374151;
+  background: #FFFFFF;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.searchInput::placeholder {
+  color: #9CA3AF;
+}
+
+.searchInput:focus {
+  background: #FFFFFF;
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* ===== Section ===== */
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Interests List ===== */
+.interestsList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== Interest Item ===== */
+.interestItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.interestItem:hover {
+  background: #FEFEFE;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.iconWrapper {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F3F4F6;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.interestIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.interestName {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  text-align: left;
+}
+
+/* ===== Remove Button ===== */
+.removeButton {
+  padding: 10px 24px;
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #7C3AED;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.2);
+}
+
+.removeButton:hover {
+  background: #6D28D9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+}
+
+.removeButton:active {
+  transform: translateY(0);
+}
+
+/* ===== No Interests ===== */
+.noInterests {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.noInterests p {
+  font-size: 0.938rem;
+  color: #6B7280;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .closeButton {
+    top: 20px;
+    right: 24px;
+  }
+
+  .modalHeader {
+    padding: 20px 24px;
+  }
+
+  .modalContent {
+    padding: 40px 24px 80px;
+  }
+
+  .modalTitle {
+    font-size: 1.875rem;
+    margin-bottom: 28px;
+  }
+
+  .searchInput {
+    padding: 14px 18px 14px 48px;
+  }
+
+  .searchIcon {
+    left: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  .interestsList {
+    gap: 12px;
+  }
+
+  .interestItem {
+    padding: 18px 20px;
+    gap: 14px;
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .interestIcon {
+    font-size: 1.375rem;
+  }
+
+  .interestName {
+    font-size: 0.938rem;
+  }
+
+  .removeButton {
+    padding: 9px 20px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 32px 16px 60px;
+  }
+
+  .modalTitle {
+    font-size: 1.625rem;
+    margin-bottom: 24px;
+  }
+
+  .searchContainer {
+    margin-bottom: 32px;
+  }
+
+  .interestItem {
+    padding: 16px 18px;
+    gap: 12px;
+  }
+
+  .iconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .interestIcon {
+    font-size: 1.25rem;
+  }
+
+  .interestName {
+    font-size: 0.875rem;
+  }
+
+  .removeButton {
+    padding: 8px 18px;
+    font-size: 0.813rem;
+  }
+}

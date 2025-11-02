@@ -1,0 +1,381 @@
+/* ===== Main Container ===== */
+.mainContainer {
+  min-height: 100vh;
+  background: #E8E4F3;
+}
+
+/* ===== Modal Card ===== */
+.modalCard {
+  background: #E8E4F3;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== Close Button ===== */
+.closeButton {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #6B7280;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  z-index: 10;
+}
+
+.closeButton:hover {
+  color: #111827;
+}
+
+/* ===== Header ===== */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 48px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+  background: #000000;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== Content ===== */
+.modalContent {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 56px 40px 100px;
+}
+
+.modalTitle {
+  font-size: 2.125rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 48px;
+  letter-spacing: -0.02em;
+}
+
+/* ===== Sections ===== */
+.section {
+  margin-bottom: 36px;
+}
+
+.section:last-of-type {
+  margin-bottom: 48px;
+}
+
+.sectionTitle {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Radio Option ===== */
+.radioOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 2px solid transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.radioOption:hover {
+  background: #FEFEFE;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.radioOption:last-child {
+  margin-bottom: 0;
+}
+
+.optionContent {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.optionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.optionDescription {
+  font-size: 0.875rem;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* ===== Radio Input ===== */
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radioCircle {
+  width: 26px;
+  height: 26px;
+  border: 2.5px solid #D1D5DB;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.radioCircle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 14px;
+  height: 14px;
+  background: #111827;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.radioInput:checked ~ .radioCircle {
+  border-color: #111827;
+  border-width: 2.5px;
+}
+
+.radioInput:checked ~ .radioCircle::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radioOption:hover .radioCircle {
+  border-color: #9CA3AF;
+}
+
+/* ===== Toggle Option ===== */
+.toggleOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.toggleOption:hover {
+  background: #FEFEFE;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.toggleInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggleSwitch {
+  position: relative;
+  width: 56px;
+  height: 30px;
+  background: #E5E7EB;
+  border-radius: 30px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggleSwitch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.toggleInput:checked ~ .toggleSwitch {
+  background: #A78BFA;
+}
+
+.toggleInput:checked ~ .toggleSwitch::after {
+  transform: translateX(26px);
+}
+
+/* ===== Button Container ===== */
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0;
+  padding-top: 12px;
+}
+
+.saveButton {
+  padding: 14px 36px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #7C3AED;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+}
+
+.saveButton:hover {
+  background: #6D28D9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+
+.saveButton:active {
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .closeButton {
+    top: 20px;
+    right: 24px;
+  }
+
+  .modalHeader {
+    padding: 20px 24px;
+  }
+
+  .modalContent {
+    padding: 40px 24px 80px;
+  }
+
+  .modalTitle {
+    font-size: 1.875rem;
+    margin-bottom: 36px;
+  }
+
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section:last-of-type {
+    margin-bottom: 40px;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  .radioOption,
+  .toggleOption {
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+
+  .optionTitle {
+    font-size: 0.938rem;
+  }
+
+  .optionDescription {
+    font-size: 0.813rem;
+  }
+
+  .radioCircle {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+
+  .radioCircle::after {
+    width: 12px;
+    height: 12px;
+  }
+
+  .toggleSwitch {
+    width: 52px;
+    height: 28px;
+  }
+
+  .toggleSwitch::after {
+    width: 22px;
+    height: 22px;
+  }
+
+  .toggleInput:checked ~ .toggleSwitch::after {
+    transform: translateX(24px);
+  }
+
+  .saveButton {
+    padding: 12px 32px;
+    font-size: 0.938rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 32px 16px 60px;
+  }
+
+  .modalTitle {
+    font-size: 1.625rem;
+    margin-bottom: 28px;
+  }
+
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section:last-of-type {
+    margin-bottom: 36px;
+  }
+
+  .buttonContainer {
+    justify-content: stretch;
+  }
+
+  .saveButton {
+    width: 100%;
+  }
+
+  .radioOption,
+  .toggleOption {
+    padding: 16px 18px;
+  }
+}
