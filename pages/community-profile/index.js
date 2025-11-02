@@ -64,7 +64,7 @@ export default function Community() {
                   ...styles.tab,
                   ...(hoveredTab === 'events' && styles.tabHover)
                 }}
-                onClick={() => window.location.href = '/createEvent/events-community'}
+                onClick={() => window.location.href = '/create-event'}
                 onMouseEnter={() => setHoveredTab('events')}
                 onMouseLeave={() => setHoveredTab(null)}
               >
@@ -166,7 +166,7 @@ export default function Community() {
         {/* Floating Action Button */}
         <button 
           style={styles.fab}
-          onClick={() => window.location.href = '/communityProfileAdmin/create-post'}
+          onClick={() => window.location.href = '/community-profile/create-post'}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.1)';
             e.currentTarget.style.boxShadow = '0 8px 20px rgba(124, 92, 219, 0.5)';
