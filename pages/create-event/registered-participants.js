@@ -1,6 +1,7 @@
 // pages/create-event/registered-participants.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function RegisteredParticipants() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -119,18 +120,16 @@ export default function RegisteredParticipants() {
         </div>
 
         {/* Back Button */}
-        <button 
-          style={styles.backButton}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#6b4bc4';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = '#7c5cdb';
-          }}
-          onClick={() => window.history.back()}
-        >
-          Back
-        </button>
+        <div style={styles.backButtonWrapper}>
+          <Button 
+            variant="primary" 
+            size="medium" 
+            fullWidth
+            onClick={() => window.history.back()}
+          >
+            Back
+          </Button>
+        </div>
       </main>
     </div>
   );
@@ -243,20 +242,7 @@ const styles = {
     color: '#1d1d1f',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
-  backButton: {
+  backButtonWrapper: {
     width: '100%',
-    maxWidth: '540px',
-    margin: '0 auto',
-    display: 'block',
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    padding: '14px 24px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'background-color 0.2s',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
 };

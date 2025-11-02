@@ -1,6 +1,7 @@
 // pages/create-event/notifications.js
 import React from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function Notifications() {
   const newEventRegistrations = [
@@ -67,7 +68,11 @@ export default function Notifications() {
                 <div style={styles.cardDetail}>Registration Date/Time: {item.registrationDateTime}</div>
                 <div style={styles.cardDetail}>Member: {item.memberName}</div>
               </div>
-              <button style={styles.actionButton}>View Registrations</button>
+              <div style={styles.buttonWrapper}>
+                <Button variant="primary" size="medium">
+                  View Registrations
+                </Button>
+              </div>
             </div>
           ))}
         </section>
@@ -83,7 +88,11 @@ export default function Notifications() {
                 <div style={styles.cardDetail}>Preview: '{item.preview}'</div>
                 <div style={styles.cardDetail}>Post Title: '{item.postTitle}'</div>
               </div>
-              <button style={styles.actionButton}>Review Post</button>
+              <div style={styles.buttonWrapper}>
+                <Button variant="primary" size="medium">
+                  Review Post
+                </Button>
+              </div>
             </div>
           ))}
         </section>
@@ -99,7 +108,11 @@ export default function Notifications() {
                 <div style={styles.cardDetail}>Report Type: '{item.reportType}'</div>
                 <div style={styles.cardDetail}>Related {item.reportType === 'Content Violation' ? 'Post' : 'Event'}: '{item.relatedItem}'</div>
               </div>
-              <button style={styles.actionButton}>Review Report</button>
+              <div style={styles.buttonWrapper}>
+                <Button variant="primary" size="medium">
+                  Review Report
+                </Button>
+              </div>
             </div>
           ))}
         </section>
@@ -163,17 +176,7 @@ const styles = {
     marginBottom: '4px',
     lineHeight: '1.5',
   },
-  actionButton: {
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '20px',
-    padding: '10px 24px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    transition: 'background-color 0.2s, transform 0.1s',
+  buttonWrapper: {
     flexShrink: 0,
   },
 };

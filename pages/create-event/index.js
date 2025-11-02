@@ -1,6 +1,7 @@
 // pages/create-event/index.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function CreateEvent() {
   const [hoveredTab, setHoveredTab] = useState(null);
@@ -104,7 +105,11 @@ export default function CreateEvent() {
               <div style={styles.eventContent}>
                 <h2 style={styles.eventTitle}>{event.title}</h2>
                 <p style={styles.eventDescription}>{event.description}</p>
-                <button style={styles.participantButton}>Participants</button>
+                <div style={styles.buttonWrapper}>
+                  <Button variant="primary" size="medium">
+                    Participants
+                  </Button>
+                </div>
               </div>
               <div style={styles.eventImage}>
                 <img 
@@ -227,17 +232,8 @@ const styles = {
     marginBottom: '20px',
     flex: 1,
   },
-  participantButton: {
-    backgroundColor: '#7c5cdb',
-    color: 'white',
-    border: 'none',
-    borderRadius: '20px',
-    padding: '10px 24px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
+  buttonWrapper: {
     alignSelf: 'flex-start',
-    transition: 'background-color 0.2s',
   },
   eventImage: {
     width: '220px',

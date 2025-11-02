@@ -2,6 +2,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 export default function CreateEvent() {
   const [isOnlineEvent, setIsOnlineEvent] = useState(false);
@@ -42,10 +43,8 @@ export default function CreateEvent() {
         <title>Create New Event - ConnectHub</title>
       </Head>
 
-      {/* Navbar */}
       <Navbar />
 
-      {/* Main Content */}
       <div style={styles.container}>
         <div style={styles.formWrapper}>
           <h1 style={styles.title}>Create New Event</h1>
@@ -138,7 +137,7 @@ export default function CreateEvent() {
               </label>
             </div>
 
-            {/* Maximum Participants */}
+            {/* Max Participants */}
             <div style={styles.formGroup}>
               <label style={styles.label}>Maximum Number of Participants (optional)</label>
               <input
@@ -164,7 +163,6 @@ export default function CreateEvent() {
             {/* Upload Banner/Poster */}
             <div style={styles.uploadSection}>
               <label style={styles.uploadLabel}>Upload Event Banner/Poster</label>
-              <p style={styles.uploadSubtext}>Click to upload or drag and drop</p>
 
               <div style={styles.uploadBox}>
                 {imagePreview ? (
@@ -172,28 +170,35 @@ export default function CreateEvent() {
                 ) : (
                   <div style={styles.uploadPlaceholder}>
                     <p style={styles.uploadPlaceholderText}>Upload Event Banner/Poster</p>
-                    <p style={styles.uploadHint}>Click to upload or drag and drop</p>
+                    <p style={styles.uploadHint}>Click the button below to upload</p>
                   </div>
                 )}
-              </div>
 
-              <input
-                type="file"
-                name="banner"
-                id="bannerUpload"
-                accept="image/*"
-                onChange={handleImageUpload}
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="bannerUpload" style={styles.uploadButton}>
-                Upload Image
-              </label>
+                {/* Hidden file input */}
+                <input
+                  type="file"
+                  name="banner"
+                  id="bannerUpload"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: 'none' }}
+                />
+
+                {/* Upload button (now INSIDE the box) */}
+                <label htmlFor="bannerUpload" style={styles.uploadButtonLabel}>
+                  <Button variant="primary" size="medium">
+                    Upload Image
+                  </Button>
+                </label>
+              </div>
             </div>
 
             {/* Submit Button */}
-            <button type="submit" style={styles.submitBtn}>
-              Create Event
-            </button>
+            <div style={styles.submitWrapper}>
+              <Button variant="primary" size="medium" fullWidth type="submit">
+                Create Event
+              </Button>
+            </div>
           </form>
         </div>
       </div>
@@ -235,7 +240,6 @@ const styles = {
     border: '1px solid #d2d2d7',
     borderRadius: '8px',
     fontSize: '14px',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
   },
   textarea: {
     width: '100%',
@@ -251,46 +255,26 @@ const styles = {
   checkboxLabel: { fontSize: '14px', color: '#1d1d1f', fontWeight: 500, cursor: 'pointer' },
   uploadSection: { display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' },
   uploadLabel: { fontSize: '14px', fontWeight: 600, color: '#1d1d1f' },
-  uploadSubtext: { fontSize: '13px', color: '#86868b', marginTop: '-8px' },
   uploadBox: {
     width: '100%',
-    minHeight: '200px',
+    minHeight: '220px',
     border: '2px dashed #d2d2d7',
     borderRadius: '8px',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fafafa',
+    gap: '16px',
     position: 'relative',
     overflow: 'hidden',
   },
-  uploadPlaceholder: { textAlign: 'center', padding: '20px' },
+  uploadPlaceholder: { textAlign: 'center', padding: '10px' },
   uploadPlaceholderText: { fontSize: '15px', fontWeight: 600, color: '#1d1d1f', marginBottom: '4px' },
   uploadHint: { fontSize: '13px', color: '#86868b' },
-  imagePreview: { width: '100%', height: '100%', objectFit: 'cover' },
-  uploadButton: {
-    alignSelf: 'center',
-    padding: '10px 32px',
-    background: 'linear-gradient(90deg, #7c5cdb 0%, #9b7edb 100%)',
-    color: 'white',
-    border: 'none',
-    borderRadius: '6px',
-    fontSize: '14px',
-    fontWeight: 600,
+  imagePreview: { width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' },
+  uploadButtonLabel: {
     cursor: 'pointer',
-    transition: 'transform 0.2s, box-shadow 0.2s',
   },
-  submitBtn: {
-    width: '100%',
-    padding: '14px 24px',
-    background: 'linear-gradient(90deg, #7c5cdb 0%, #9b7edb 100%)',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    fontSize: '16px',
-    fontWeight: 600,
-    cursor: 'pointer',
-    transition: 'transform 0.2s, box-shadow 0.2s',
-    marginTop: '16px',
-  },
+  submitWrapper: { marginTop: '16px' },
 };
