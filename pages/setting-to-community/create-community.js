@@ -1,6 +1,5 @@
 // pages/setting-to-community/create-community.js
 import React, { useState } from 'react';
-import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
 
 export default function CreateCommunity() {
@@ -148,7 +147,6 @@ export default function CreateCommunity() {
       `}</style>
 
       <div className="pageWrapper">
-        <Navbar />
 
         <div className="container">
           <h1 className="title">Create your community</h1>

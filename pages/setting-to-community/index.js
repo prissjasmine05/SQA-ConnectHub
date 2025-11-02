@@ -1,9 +1,21 @@
 // pages/setting-to-community/index.js
 import React from 'react';
-import Navbar from '../../components/Navbar';
+import { useRouter } from 'next/router';
 import Button from '../../components/Button';
 
 export default function ChangeToCommunity() {
+  const router = useRouter(); // ← inisialisasi router
+
+  // fungsi untuk arahkan ke login community
+  const handleYesClick = () => {
+    router.push('/setting-to-community/login-community');
+  };
+
+  // fungsi untuk arahkan ke create community
+  const handleNoClick = () => {
+    router.push('/setting-to-community/create-community');
+  };
+
   return (
     <>
       <style jsx>{`
@@ -79,8 +91,6 @@ export default function ChangeToCommunity() {
       `}</style>
 
       <div className="pageWrapper">
-        <Navbar />
-
         <div className="container">
           <h1 className="title">Change to Community Account</h1>
 
@@ -88,11 +98,19 @@ export default function ChangeToCommunity() {
             <p className="question">Do you already have a community account?</p>
 
             <div className="buttonGroup">
-              <Button variant="secondary" size="medium">
+              <Button 
+                variant="secondary" 
+                size="medium" 
+                onClick={handleYesClick}
+              >
                 Yes, I already have one
               </Button>
 
-              <Button variant="primary" size="medium">
+              <Button 
+                variant="primary" 
+                size="medium" 
+                onClick={handleNoClick}
+              >
                 No, I don't have one
               </Button>
             </div>

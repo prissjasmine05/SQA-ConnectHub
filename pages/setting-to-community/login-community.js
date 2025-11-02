@@ -1,6 +1,5 @@
 // pages/setting-to-community/login-community.js
 import React, { useState } from 'react';
-import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
 
 export default function LoginCommunity() {
@@ -137,7 +136,6 @@ export default function LoginCommunity() {
       `}</style>
 
       <div className="pageWrapper">
-        <Navbar />
 
         <div className="container">
           <h1 className="title">Log in to Community</h1>
