@@ -1,9 +1,37 @@
 // pages/premium/index.js
 import React from 'react';
-import Navbar from '../../components/Navbar';
+import Image from 'next/image';
 import Button from '../../components/Button';
 
 export default function Premium() {
+  const styles = {
+    header: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '20px 40px',
+      backgroundColor: '#ffffff',
+      boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 10,
+    },
+    headerLeft: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+    },
+    closeButton: {
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#374151',
+      padding: '8px',
+      borderRadius: '50%',
+      transition: 'background 0.2s',
+    },
+  };
+
   return (
     <>
       <style jsx>{`
@@ -15,7 +43,7 @@ export default function Premium() {
         .container {
           max-width: 680px;
           margin: 0 auto;
-          padding: 80px 20px;
+          padding: 60px 20px 80px;
         }
 
         /* Content */
@@ -113,7 +141,7 @@ export default function Premium() {
         /* Responsive */
         @media (max-width: 768px) {
           .container {
-            padding: 60px 20px;
+            padding: 40px 20px 60px;
           }
 
           .title {
@@ -128,8 +156,38 @@ export default function Premium() {
       `}</style>
 
       <div className="pageWrapper">
-        {/* Navbar */}
-        <Navbar />
+        {/* Header */}
+        <div style={styles.header}>
+          <div style={styles.headerLeft}>
+            <Image 
+              src="/images/LogoConnectHub.png"
+              alt="ConnectHub Logo"
+              width={150}
+              height={40}
+              priority
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+
+          <button 
+            style={styles.closeButton}
+            onClick={() => window.history.back()}
+            aria-label="Close"
+          >
+            <svg 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
 
         {/* Main Content */}
         <div className="container">
