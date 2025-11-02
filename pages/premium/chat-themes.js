@@ -1,4 +1,4 @@
-// pages/main-page/chat-themes.js
+// pages/premium/chat-themes.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';

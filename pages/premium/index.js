@@ -1,4 +1,4 @@
-// pages/premium.js
+// pages/premium/index.js
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';

@@ -1,4 +1,4 @@
-// pages/main-page/create-community.js
+// pages/setting-to-community/create-community.js
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
