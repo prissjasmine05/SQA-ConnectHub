@@ -1,0 +1,131 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.communityHeader {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.communityTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.communityDescription {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.tabs {
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 32px;
+}
+
+.tab {
+    padding: 12px 0;
+    font-size: 15px;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.tab:hover {
+    color: #1a1a1a;
+}
+
+.tab.active {
+    color: #1a1a1a;
+    font-weight: 600;
+    border-bottom-color: #1a1a1a;
+}
+
+.aboutSection {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.aboutSection h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.rulesList,
+.overviewList {
+    list-style: none;
+}
+
+.rulesList li,
+.overviewList li {
+    padding: 12px 0;
+    padding-left: 32px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    position: relative;
+}
+
+.rulesList li::before,
+.overviewList li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e5e5e5;
+    border-radius: 3px;
+    background: white;
+}
+
+.membersCount {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.membersPreview {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.membersPreview .memberAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.membersPreview .memberAvatar:hover {
+    transform: scale(1.15);
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+}

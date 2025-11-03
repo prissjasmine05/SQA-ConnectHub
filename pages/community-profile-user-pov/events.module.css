@@ -1,0 +1,148 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.communityHeader {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.communityTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.communityDescription {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.tabs {
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 32px;
+}
+
+.tab {
+    padding: 12px 0;
+    font-size: 15px;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.tab:hover {
+    color: #1a1a1a;
+}
+
+.tab.active {
+    color: #1a1a1a;
+    font-weight: 600;
+    border-bottom-color: #1a1a1a;
+}
+
+.eventsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.eventCard {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eventCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.eventContent {
+    flex: 1;
+}
+
+.eventTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.eventDescription {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.rsvpButton {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s;
+}
+
+.rsvpButton:hover {
+    transform: translateY(-1px);
+}
+
+.rsvpButton.going {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.eventImage {
+    width: 240px;
+    height: 160px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.iconCalendar {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    .eventCard {
+        flex-direction: column;
+    }
+    
+    .eventImage {
+        width: 100%;
+        height: 200px;
+    }
+}

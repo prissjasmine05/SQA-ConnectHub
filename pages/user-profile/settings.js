@@ -57,7 +57,7 @@ export default function SettingsPage() {
                 </div>
               </button>
 
-              <button className={styles.settingItem}>
+              <button className={`${styles.settingItem} ${styles.settingItemBeige}`}>
                 <div className={styles.iconContainer}>
                   <span>#</span>
                 </div>
@@ -75,7 +75,7 @@ export default function SettingsPage() {
             <div className={styles.settingsList}>
               <button 
                 onClick={() => router.push('/userprofile-setting/privacysettings')}
-                className={styles.settingItem}
+                className={`${styles.settingItem} ${styles.settingItemPurple}`}
               >
                 <div className={styles.iconContainer}>
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function SettingsPage() {
 
               <button 
                 onClick={() => router.push('/userprofile-setting/interest')}
-                className={styles.settingItem}
+                className={`${styles.settingItem} ${styles.settingItemPeach}`}
               >
                 <div className={styles.iconContainer}>
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

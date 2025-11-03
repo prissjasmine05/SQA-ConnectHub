@@ -7,7 +7,7 @@ export default function ManageInterest() {
   const router = useRouter();
   
   const [interests, setInterests] = useState([
-    { id: 1, name: 'Pedal', icon: '🚴' },
+    { id: 1, name: 'Padel', icon: '🎾' },
     { id: 2, name: 'Shopping', icon: '🛍️' },
     { id: 3, name: 'Fitness', icon: '💪' },
     { id: 4, name: 'Art', icon: '🎨' },

@@ -1,0 +1,257 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.communityHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.communityAvatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d4b8 100%);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.avatarIcon {
+    width: 60px;
+    height: 60px;
+    background: #d4c4a8;
+    border-radius: 50%;
+    position: relative;
+}
+
+.avatarIcon::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #c9b89a;
+    border-radius: 50%;
+    top: 8px;
+    left: 15px;
+}
+
+.avatarIcon::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 35px;
+    background: #c9b89a;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    bottom: -5px;
+    left: 5px;
+}
+
+.communityTitle {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.communityDescription {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto 12px;
+}
+
+.communityStats {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.joinButton {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    color: white;
+    border: none;
+    padding: 12px 200px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.joinButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.joinButton.joined {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.tabs {
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 32px;
+}
+
+.tab {
+    padding: 12px 0;
+    font-size: 15px;
+    color: #666;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.tab:hover {
+    color: #1a1a1a;
+}
+
+.tab.active {
+    color: #1a1a1a;
+    font-weight: 600;
+    border-bottom-color: #1a1a1a;
+}
+
+.postsFeed {
+    display: flex;
+    flex-direction: column;
+}
+
+.postCard {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.postHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.postAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e5e5e5 0%, #d4d4d4 100%);
+}
+
+.postInfo h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+}
+
+.postInfo p {
+    font-size: 13px;
+    color: #999;
+}
+
+.postContent {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.postText {
+    flex: 1;
+}
+
+.postText h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.postText p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.postImage {
+    width: 180px;
+    height: 140px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.postActions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.actionButton:hover {
+    color: #1a1a1a;
+}
+
+.actionButton.liked {
+    color: #ef4444;
+}
+
+.postTimestamp {
+    margin-left: auto;
+    font-size: 13px;
+    color: #999;
+}
+
+.iconHeart,
+.iconComment,
+.iconShare {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    .postContent {
+        flex-direction: column;
+    }
+    
+    .postImage {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .joinButton {
+        padding: 12px 80px;
+    }
+}
