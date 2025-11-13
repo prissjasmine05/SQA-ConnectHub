@@ -1,0 +1,151 @@
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Voucher Header with decorative image */
+.voucherHeader {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 32px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+}
+
+.voucherHeaderImage {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Voucher Content */
+.voucherContent {
+    background: white;
+    padding: 48px 60px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.voucherTitle {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+}
+
+.voucherMessage {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Voucher Code Container */
+.voucherCodeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 48px;
+    padding: 24px;
+    background: #fafafa;
+    border-radius: 12px;
+}
+
+.voucherCodeSection {
+    flex: 1;
+    text-align: left;
+}
+
+.codeLabel {
+    font-size: 16px;
+    color: #1a1a1a;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.codeValue {
+    font-size: 24px;
+    font-weight: 700;
+    color: #7c3aed;
+    letter-spacing: 2px;
+    display: inline-block;
+}
+
+.voucherImageSection {
+    width: 280px;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.voucherImageSection img,
+.voucherImageSectionImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Back to Home Button */
+.backToHomeBtn {
+    padding: 14px 40px;
+    background: #7c3aed;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.backToHomeBtn:hover {
+    background: #6d28d9;
+}
+
+.backToHomeBtn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+
+    .voucherContent {
+        padding: 32px 24px;
+    }
+
+    .voucherTitle {
+        font-size: 28px;
+    }
+
+    .voucherCodeContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .voucherCodeSection {
+        text-align: center;
+    }
+
+    .voucherImageSection {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .codeValue {
+        font-size: 20px;
+    }
+
+    .backToHomeBtn {
+        width: 100%;
+    }
+}

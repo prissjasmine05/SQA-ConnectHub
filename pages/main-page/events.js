@@ -1,11 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Navbar from '../../components/Navbar';
 import Button from '../../components/Button';
 import styles from './Events.module.css';
 import mainStyles from './MainPage.module.css';   
 
 export default function EventsPage() {
+  const router = useRouter();
+
   const events = [
     {
       id: 1,
@@ -44,6 +47,11 @@ export default function EventsPage() {
     }
   ];
 
+  const handleJoinEvent = (eventId) => {
+    // You can pass event data if needed
+    router.push('/community-profile-user-pov/join-event');
+  };
+
   return (
     <>
       <Head>
@@ -54,7 +62,7 @@ export default function EventsPage() {
 
       <main className={mainStyles.mainContainer}>
         <div className={mainStyles.contentWrapper}>
-          <div className={mainStyles.feedHeader}>           {/* <- sama persis */}
+          <div className={mainStyles.feedHeader}>
            <h1>Upcoming Events</h1>
            <div className={mainStyles.tabs}>   
               <Link href="/main-page">
@@ -76,9 +84,14 @@ export default function EventsPage() {
                   <span className={styles.eventCommunity}>{event.community}</span>
                   <h3>{event.title}</h3>
                   <p>{event.description}</p>
-                  <Button variant="primary" size="small" className={styles.joinBtn}>
-  Join Event
-</Button>
+                  <Button 
+                    variant="primary" 
+                    size="small" 
+                    className={styles.joinBtn}
+                    onClick={() => handleJoinEvent(event.id)}
+                  >
+                    Join Event
+                  </Button>
                 </div>
                 <div className={styles.eventImage}>
                   <img src={event.image} alt={event.title} />
