@@ -124,7 +124,10 @@ export default function EditProfilePage() {
             Log Out
           </button>
           
-          <button className={styles.contingentLink}>
+          <button 
+            onClick={() => router.push('/setting-to-community')}
+            className={styles.contingentLink}
+          >
             Change to Community Account?
           </button>
         </div>

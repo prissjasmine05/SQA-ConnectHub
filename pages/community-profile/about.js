@@ -30,7 +30,7 @@ export default function CommunityAbout() {
               ...(activeTab === 'Posts' && styles.tabActive),
               ...(hoveredTab === 'Posts' && styles.tabHover)
             }}
-            onClick={() => setActiveTab('Posts')}
+            onClick={() => window.location.href = '/community-profile'}
             onMouseEnter={() => setHoveredTab('Posts')}
             onMouseLeave={() => setHoveredTab(null)}
           >
@@ -42,7 +42,7 @@ export default function CommunityAbout() {
               ...(activeTab === 'Members' && styles.tabActive),
               ...(hoveredTab === 'Members' && styles.tabHover)
             }}
-            onClick={() => setActiveTab('Members')}
+            onClick={() => window.location.href = '/community-profile/members'}
             onMouseEnter={() => setHoveredTab('Members')}
             onMouseLeave={() => setHoveredTab(null)}
           >
@@ -54,7 +54,7 @@ export default function CommunityAbout() {
               ...(activeTab === 'Events' && styles.tabActive),
               ...(hoveredTab === 'Events' && styles.tabHover)
             }}
-            onClick={() => setActiveTab('Events')}
+            onClick={() => window.location.href = '/create-event'}
             onMouseEnter={() => setHoveredTab('Events')}
             onMouseLeave={() => setHoveredTab(null)}
           >

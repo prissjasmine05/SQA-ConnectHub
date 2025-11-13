@@ -1,8 +1,11 @@
 // pages/setting-to-community/login-community.js
 import React, { useState } from 'react';
+import { useRouter } from 'next/router'; // ✅ Tambahkan ini
 import Button from '../../components/Button';
 
 export default function LoginCommunity() {
+  const router = useRouter(); // ✅ Inisialisasi router
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -18,6 +21,9 @@ export default function LoginCommunity() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login submitted:', formData);
+
+    // ✅ Arahkan ke halaman /community-profile setelah submit
+    router.push('/community-profile');
   };
 
   return (
@@ -122,7 +128,6 @@ export default function LoginCommunity() {
           text-decoration: underline;
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
           .container {
             padding: 80px 20px;
@@ -136,7 +141,6 @@ export default function LoginCommunity() {
       `}</style>
 
       <div className="pageWrapper">
-
         <div className="container">
           <h1 className="title">Log in to Community</h1>
 

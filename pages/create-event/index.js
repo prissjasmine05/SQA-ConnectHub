@@ -69,6 +69,7 @@ export default function CreateEvent() {
                   ...styles.tab,
                   ...(hoveredTab === 'members' && styles.tabHover)
                 }}
+                onClick={() => window.location.href = '/community-profile/members'}
                 onMouseEnter={() => setHoveredTab('members')}
                 onMouseLeave={() => setHoveredTab(null)}
               >
@@ -89,6 +90,7 @@ export default function CreateEvent() {
                   ...styles.tab,
                   ...(hoveredTab === 'about' && styles.tabHover)
                 }}
+                onClick={() => window.location.href = '/community-profile/about'}
                 onMouseEnter={() => setHoveredTab('about')}
                 onMouseLeave={() => setHoveredTab(null)}
               >

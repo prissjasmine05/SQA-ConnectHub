@@ -29,11 +29,18 @@ export default function Community() {
 
           <div style={styles.actions}>
             <Button variant="primary" size="medium">
+              <img 
+                src="/images/premium_icon.png" 
+                alt="ConnectHub" 
+                style={styles.iconButtonImage}
+              />
+            </Button>
+            <Button variant="primary" size="medium">
               Edit Community
             </Button>
-            <button style={styles.settingsButton}>
+            <Button variant="primary" size="medium">
               <span>⚙️</span>
-            </button>
+            </Button>
           </div>
 
           {/* Tabs */}
@@ -55,6 +62,7 @@ export default function Community() {
                   ...styles.tab,
                   ...(hoveredTab === 'members' && styles.tabHover)
                 }}
+                onClick={() => window.location.href = '/community-profile/members'}
                 onMouseEnter={() => setHoveredTab('members')}
                 onMouseLeave={() => setHoveredTab(null)}
               >
@@ -76,6 +84,7 @@ export default function Community() {
                   ...styles.tab,
                   ...(hoveredTab === 'about' && styles.tabHover)
                 }}
+                onClick={() => window.location.href = '/community-profile/about'}
                 onMouseEnter={() => setHoveredTab('about')}
                 onMouseLeave={() => setHoveredTab(null)}
               >

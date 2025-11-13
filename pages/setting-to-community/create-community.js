@@ -1,8 +1,11 @@
 // pages/setting-to-community/create-community.js
 import React, { useState } from 'react';
+import { useRouter } from 'next/router'; // ✅ Tambahkan import router
 import Button from '../../components/Button';
 
 export default function CreateCommunity() {
+  const router = useRouter(); // ✅ Inisialisasi router
+
   const [formData, setFormData] = useState({
     communityName: '',
     focusTheme: '',
@@ -24,6 +27,9 @@ export default function CreateCommunity() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+
+    // ✅ Setelah submit, arahkan ke /main-page
+    router.push('/main-page');
   };
 
   return (
@@ -133,7 +139,6 @@ export default function CreateCommunity() {
           text-decoration: underline;
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
           .container {
             padding: 40px 20px 60px;
@@ -147,7 +152,6 @@ export default function CreateCommunity() {
       `}</style>
 
       <div className="pageWrapper">
-
         <div className="container">
           <h1 className="title">Create your community</h1>
 
