@@ -131,28 +131,38 @@
   background: #D7EFDA;
 }
 
-.settingItemBlue {
-  background: #E3F2FD;
-}
-
-.settingItemBlue:hover {
-  background: #D0E7F9;
-}
-
 .settingItemBeige {
-  background: #F5F5F0;
+  background: #FFF9F0;
+  border: 2px solid #4A90E2;
 }
 
 .settingItemBeige:hover {
-  background: #EEEEE5;
+  background: #FFF5E6;
+  border: 2px solid #3A7BC8;
 }
 
-.settingItemLightPurple {
-  background: #F3E5F5;
+.settingItemPurple {
+  background: #EDE5FF;
 }
 
-.settingItemLightPurple:hover {
-  background: #E8D4ED;
+.settingItemPurple:hover {
+  background: #e8defc; 
+}
+
+.settingItemPeach {
+  background: #FFEDE5;
+}
+
+.settingItemPeach:hover {
+  background: #fbe3d9;
+}
+
+.settingItemBlue {
+  background: #e2f2fa;
+}
+
+.settingItemBlue:hover {
+  background: #D6EAF8;
 }
 
 /* ===== Icon Container ===== */

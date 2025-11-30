@@ -1,0 +1,225 @@
+/* Media Container */
+.mediaContainer {
+  margin: 12px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Single Media */
+.singleMedia {
+  width: 100%;
+  max-height: 500px;
+}
+
+/* Two Media */
+.twoMedia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  max-height: 300px;
+}
+
+/* Three Media */
+.threeMedia {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2px;
+  max-height: 300px;
+}
+
+.mainMedia {
+  height: 100%;
+}
+
+.sideMedia {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  height: 100%;
+}
+
+/* Four or More Media */
+.fourMedia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  max-height: 300px;
+}
+
+/* Media Wrapper */
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+}
+
+/* Media Items */
+.mediaItem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  display: block;
+}
+
+.mediaItem:hover {
+  transform: scale(1.02);
+  filter: brightness(0.95);
+}
+
+/* More Media Overlay */
+.moreMedia {
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.overlay:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.moreCount {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1001;
+}
+
+.closeButton:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.fullscreenMedia {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Video Controls */
+video.mediaItem {
+  background: black;
+}
+
+video.fullscreenMedia {
+  background: black;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mediaContainer {
+    margin: 8px 0;
+    border-radius: 8px;
+  }
+
+  .fourMedia,
+  .threeMedia,
+  .twoMedia {
+    max-height: 250px;
+  }
+
+  .singleMedia {
+    max-height: 400px;
+  }
+
+  .closeButton {
+    top: -40px;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .modalContent {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+
+  .overlay {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fourMedia,
+  .threeMedia,
+  .twoMedia {
+    max-height: 200px;
+  }
+
+  .singleMedia {
+    max-height: 300px;
+  }
+
+  .mediaWrapper {
+    min-height: 100px;
+  }
+}

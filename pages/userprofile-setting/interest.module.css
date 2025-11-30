@@ -1,26 +1,18 @@
 /* ===== Main Container ===== */
 .mainContainer {
   min-height: 100vh;
-  background: #E8E4F3;
-}
-
-/* ===== Modal Card ===== */
-.modalCard {
-  background: #E8E4F3;
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
+  background: #f3efff;
 }
 
 /* ===== Close Button ===== */
 .closeButton {
   position: fixed;
-  top: 24px;
-  right: 32px;
+  top: 20px;
+  right: 28px;
   background: none;
   border: none;
-  font-size: 1.75rem;
-  color: #6B7280;
+  font-size: 1.5rem;
+  color: #111827;
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -32,42 +24,42 @@
 }
 
 .closeButton:hover {
-  color: #111827;
+  color: #6B7280;
 }
 
 /* ===== Header ===== */
 .modalHeader {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 24px 48px;
+  gap: 8px;
+  padding: 20px 40px;
   background: #FFFFFF;
   border-bottom: 1px solid #E5E7EB;
 }
 
 .logoIcon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   background: #000000;
-  border-radius: 3px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
 .logoText {
-  font-size: 1.063rem;
-  font-weight: 700;
+  font-size: 0.938rem;
+  font-weight: 600;
   color: #111827;
 }
 
 /* ===== Content ===== */
 .modalContent {
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 56px 40px 100px;
+  padding: 40px 40px 80px;
 }
 
 .modalTitle {
-  font-size: 2.125rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #111827;
   margin-bottom: 32px;
@@ -77,28 +69,28 @@
 /* ===== Search Container ===== */
 .searchContainer {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .searchIcon {
   position: absolute;
-  left: 20px;
+  left: 18px;
   top: 50%;
   transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: #9CA3AF;
   pointer-events: none;
 }
 
 .searchInput {
   width: 100%;
-  padding: 16px 20px 16px 52px;
-  font-size: 0.938rem;
+  padding: 14px 18px 14px 48px;
+  font-size: 0.875rem;
   color: #374151;
   background: #FFFFFF;
-  border: 2px solid #E5E7EB;
-  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
   outline: none;
   transition: all 0.2s ease;
   font-family: inherit;
@@ -120,10 +112,10 @@
 }
 
 .sectionTitle {
-  font-size: 1.063rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   letter-spacing: -0.01em;
 }
 
@@ -131,7 +123,7 @@
 .interestsList {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 /* ===== Interest Item ===== */
@@ -139,28 +131,45 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 20px 24px;
+  padding: 18px 24px;
   background: #FFFFFF;
   border-radius: 12px;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .interestItem:hover {
   background: #FEFEFE;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transform: translateY(-1px);
 }
 
 .iconWrapper {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F3F4F6;
   border-radius: 10px;
   flex-shrink: 0;
+}
+
+.iconWrapperPink {
+  background: #FCE4EC;
+}
+
+.iconWrapperBlack {
+  background: #E5E7EB;
+}
+
+.iconWrapperGreen {
+  background: #E8F5E9;
+}
+
+.iconWrapperBlue {
+  background: #E3F2FD;
+}
+
+.iconWrapperPurple {
+  background: #F3E5F5;
 }
 
 .interestIcon {
@@ -170,35 +179,101 @@
 
 .interestName {
   flex: 1;
-  font-size: 1rem;
+  font-size: 0.938rem;
   font-weight: 600;
   color: #111827;
   text-align: left;
 }
 
+/* ===== Loading State ===== */
+.loadingState {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.loadingState p {
+  font-size: 0.938rem;
+  color: #6B7280;
+}
+
 /* ===== Remove Button ===== */
 .removeButton {
   padding: 10px 24px;
-  font-size: 0.938rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #FFFFFF;
-  background: #7C3AED;
+  background: #EF4444;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(124, 58, 237, 0.2);
 }
 
 .removeButton:hover {
-  background: #6D28D9;
+  background: #DC2626;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
 }
 
 .removeButton:active {
   transform: translateY(0);
+}
+
+/* ===== Add Button ===== */
+.addButton {
+  padding: 10px 24px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #10B981;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.addButton:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.addButton:active {
+  transform: translateY(0);
+}
+
+/* ===== Save Section ===== */
+.saveSection {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.saveButton {
+  padding: 14px 32px;
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #7C3AED;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #6D28D9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
 }
 
 /* ===== No Interests ===== */
@@ -215,45 +290,84 @@
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .closeButton {
-    top: 20px;
+    top: 18px;
     right: 24px;
   }
 
   .modalHeader {
-    padding: 20px 24px;
+    padding: 18px 28px;
   }
 
   .modalContent {
-    padding: 40px 24px 80px;
+    padding: 36px 28px 70px;
   }
 
   .modalTitle {
-    font-size: 1.875rem;
+    font-size: 1.75rem;
     margin-bottom: 28px;
   }
 
   .searchInput {
-    padding: 14px 18px 14px 48px;
+    padding: 13px 16px 13px 44px;
+    font-size: 0.813rem;
   }
 
   .searchIcon {
-    left: 18px;
-    width: 18px;
-    height: 18px;
+    left: 16px;
+    width: 16px;
+    height: 16px;
   }
 
   .sectionTitle {
-    font-size: 1rem;
-    margin-bottom: 16px;
+    font-size: 0.938rem;
+    margin-bottom: 14px;
   }
 
   .interestsList {
-    gap: 12px;
+    gap: 10px;
   }
 
   .interestItem {
-    padding: 18px 20px;
+    padding: 16px 20px;
     gap: 14px;
+  }
+
+  .iconWrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .interestIcon {
+    font-size: 1.375rem;
+  }
+
+  .interestName {
+    font-size: 0.875rem;
+  }
+
+  .removeButton {
+    padding: 9px 20px;
+    font-size: 0.813rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 28px 20px 60px;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  .searchContainer {
+    margin-bottom: 28px;
+  }
+
+  .interestItem {
+    padding: 14px 18px;
+    gap: 12px;
   }
 
   .iconWrapper {
@@ -262,53 +376,15 @@
   }
 
   .interestIcon {
-    font-size: 1.375rem;
-  }
-
-  .interestName {
-    font-size: 0.938rem;
-  }
-
-  .removeButton {
-    padding: 9px 20px;
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .modalContent {
-    padding: 32px 16px 60px;
-  }
-
-  .modalTitle {
-    font-size: 1.625rem;
-    margin-bottom: 24px;
-  }
-
-  .searchContainer {
-    margin-bottom: 32px;
-  }
-
-  .interestItem {
-    padding: 16px 18px;
-    gap: 12px;
-  }
-
-  .iconWrapper {
-    width: 36px;
-    height: 36px;
-  }
-
-  .interestIcon {
     font-size: 1.25rem;
   }
 
   .interestName {
-    font-size: 0.875rem;
+    font-size: 0.813rem;
   }
 
   .removeButton {
     padding: 8px 18px;
-    font-size: 0.813rem;
+    font-size: 0.75rem;
   }
 }

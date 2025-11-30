@@ -208,6 +208,75 @@
   transform: translateY(0);
 }
 
+/* ===== Loading State ===== */
+.loadingState {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.loadingState p {
+  font-size: 0.938rem;
+  color: #6B7280;
+}
+
+/* ===== Community Meta ===== */
+.communityMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.813rem;
+  color: #9CA3AF;
+  margin-top: 4px;
+}
+
+.communityMeta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== Community Actions ===== */
+.communityActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.viewButton {
+  padding: 8px 16px;
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: #7C3AED;
+  background: transparent;
+  border: 1px solid #7C3AED;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.viewButton:hover {
+  background: #7C3AED;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.leaveButton {
+  padding: 8px 16px;
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #EF4444;
+  border: 1px solid #EF4444;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.leaveButton:hover {
+  background: #DC2626;
+  border-color: #DC2626;
+  transform: translateY(-1px);
+}
+
 /* ===== No Communities ===== */
 .noCommunities {
   text-align: center;
@@ -217,6 +286,25 @@
 .noCommunities p {
   font-size: 0.938rem;
   color: #6B7280;
+  margin-bottom: 16px;
+}
+
+.exploreButton {
+  padding: 12px 24px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: #7C3AED;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.exploreButton:hover {
+  background: #6D28D9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
 }
 
 /* ===== Responsive ===== */

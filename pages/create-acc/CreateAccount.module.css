@@ -261,6 +261,19 @@
     justify-content: center;
     margin-top: 8px;
   }
+
+  .error {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
   
   /* ========== RESPONSIVE ========== */
   @media (max-width: 1200px) {

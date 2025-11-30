@@ -1,78 +1,306 @@
 .notificationsContainer {
-    background: #F9FAFB;
-    min-height: 100vh;
-    padding: 2rem 0;
-  }
-  
+  background: #F9FAFB;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: #1a1a1a;
+  font-size: 1.1rem;
+}
+
+.contentWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.unreadBadge {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  background: rgba(102, 126, 234, 0.1);
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  color: #667eea;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterBtn:hover {
+  background: rgba(102, 126, 234, 0.2);
+  transform: translateY(-1px);
+}
+
+.filterBtn.active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: transparent;
+}
+
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.emptyState h3 {
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-size: 1.3rem;
+}
+
+.emptyState p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.notificationCard {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.notificationCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.notificationCard.unread {
+  border-left: 4px solid #667eea;
+  background: rgba(102, 126, 234, 0.02);
+}
+
+.notificationCard.unread::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border-radius: 50%;
+}
+
+.notificationIcon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notificationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.notificationContent h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notificationTime {
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: 400;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notificationMessage {
+  color: #4B5563;
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.notificationSender {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.senderAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notificationActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.markReadBtn,
+.deleteBtn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.markReadBtn:hover {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.deleteBtn:hover {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .contentWrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
-  
+
   .header {
-    margin-bottom: 2rem;
-  }
-  
-  .header h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #111827;
-  }
-  
-  .notificationsList {
-    display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: flex-start;
   }
-  
+
+  .header h1 {
+    font-size: 1.7rem;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+
   .notificationCard {
-    background: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    flex-direction: column;
+    gap: 12px;
   }
-  
-  .notificationContent h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.75rem;
+
+  .notificationCard.unread::before {
+    top: 16px;
+    right: 16px;
   }
-  
-  .description {
-    color: #4B5563;
-    margin-bottom: 0.5rem;
-    font-size: 0.9375rem;
+
+  .notificationIcon {
+    align-self: flex-start;
   }
-  
-  .community {
-    color: #6B7280;
-    margin-bottom: 1.25rem;
-    font-size: 0.9375rem;
+
+  .notificationHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
-  
+
   .notificationActions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: row;
+    align-self: flex-end;
   }
-  
-  /* Responsive */
-  @media (max-width: 640px) {
-    .contentWrapper {
-      padding: 0 1rem;
-    }
-  
-    .notificationCard {
-      padding: 1.5rem;
-    }
-  
-    .notificationActions {
-      flex-direction: column;
-    }
-  
-    .notificationActions button {
-      width: 100%;
-    }
+}
+
+@media (max-width: 480px) {
+  .notificationCard {
+    padding: 12px;
   }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .filterBtn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .notificationIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+}

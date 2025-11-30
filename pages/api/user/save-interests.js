@@ -1,40 +1,35 @@
-// /pages/api/user/save-interests.js
-import db from '../../../lib/mongodb';
-import User from '../../../models/User';
-import { verifyTokenFromCookie } from '../../../lib/auth';
+import connectDB from '@/lib/mongodb';
+import User from '@/models/User';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== 'PUT' && req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' });
 
   try {
-    await db();
+    await connectDB();
 
-    // 🔹 Verifikasi JWT dari cookie
-    const payload = verifyTokenFromCookie(req);
+    const token = req.cookies.ch_token;
+    if (!token) return res.status(401).json({ message: 'Not authenticated' });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     const { interests } = req.body;
-
-    // 🔹 Validasi input
-    if (!Array.isArray(interests)) {
-      return res
-        .status(400)
-        .json({ ok: false, message: 'interests must be an array' });
+    if (!interests || !Array.isArray(interests)) {
+      return res.status(400).json({ message: 'Interests must be an array' });
     }
 
-    // 🔹 Update user di database
     const user = await User.findByIdAndUpdate(
-      payload.sub, // diset otomatis dari payload.uid di lib/auth.js
-      { $set: { interests, onboardingCompleted: true } },
+      decoded.uid,
+      { interests },
       { new: true }
-    ).lean();
+    ).select('-password');
 
-    if (!user)
-      return res.status(404).json({ ok: false, message: 'User not found' });
+    if (!user) return res.status(404).json({ message: 'User not found' });
 
-    return res.status(200).json({ ok: true, user });
-  } catch (err) {
-    if (err.message === 'NO_TOKEN')
-      return res.status(401).json({ ok: false, message: 'Unauthorized' });
-    console.error('[save-interests]', err);
-    return res.status(500).json({ ok: false, message: 'Internal error' });
+    return res.status(200).json({ message: 'Interests updated', user });
+
+  } catch (error) {
+    console.error('Update interests error:', error);
+    return res.status(500).json({ message: 'Server error' });
   }
 }

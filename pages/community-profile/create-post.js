@@ -1,15 +1,105 @@
-// pages/community-profile/create-post.js
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Button from '../../components/Button';
 
 export default function CreatePost() {
   const [postContent, setPostContent] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [uploadedMedia, setUploadedMedia] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleFileUpload = async (files, type) => {
+    if (!files || files.length === 0) return;
+
+    setUploading(true);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      Array.from(files).forEach(file => {
+        formData.append('media', file);
+      });
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Upload failed');
+      }
+
+      setUploadedMedia(prev => [...prev, ...data.files]);
+    } catch (err) {
+      console.error('Upload error:', err);
+      setError(err.message || 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handlePhotoUpload = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.onchange = (e) => handleFileUpload(e.target.files, 'image');
+    input.click();
+  };
+
+  const handleVideoUpload = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'video/*';
+    input.multiple = true;
+    input.onchange = (e) => handleFileUpload(e.target.files, 'video');
+    input.click();
+  };
+
+  const removeMedia = (index) => {
+    setUploadedMedia(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Post content:', postContent);
-    // Add your API call here
+    
+    if (!postContent.trim() && uploadedMedia.length === 0) {
+      setError('Please write something or add media to post');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ 
+          content: postContent,
+          media: uploadedMedia
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to create post');
+      }
+
+      // Redirect back to community
+      window.history.back();
+    } catch (err) {
+      console.error('Create post error:', err);
+      setError(err.message || 'Failed to create post');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,7 +156,16 @@ export default function CreatePost() {
             {/* Action Buttons */}
             <div style={styles.actionGrid}>
               {/* Add Photo */}
-              <button type="button" style={styles.actionButton}>
+              <button 
+                type="button" 
+                style={{
+                  ...styles.actionButton,
+                  opacity: uploading ? 0.6 : 1,
+                  cursor: uploading ? 'not-allowed' : 'pointer'
+                }}
+                onClick={handlePhotoUpload}
+                disabled={uploading}
+              >
                 <div style={{...styles.iconCircle, backgroundColor: '#E3F2FD'}}>
                   <svg 
                     width="24" 
@@ -84,13 +183,24 @@ export default function CreatePost() {
                   </svg>
                 </div>
                 <div style={styles.actionText}>
-                  <div style={styles.actionTitle}>Add Photo</div>
+                  <div style={styles.actionTitle}>
+                    {uploading ? 'Uploading...' : 'Add Photo'}
+                  </div>
                   <div style={styles.actionSubtitle}>Upload an image from your device</div>
                 </div>
               </button>
 
               {/* Add Video */}
-              <button type="button" style={styles.actionButton}>
+              <button 
+                type="button" 
+                style={{
+                  ...styles.actionButton,
+                  opacity: uploading ? 0.6 : 1,
+                  cursor: uploading ? 'not-allowed' : 'pointer'
+                }}
+                onClick={handleVideoUpload}
+                disabled={uploading}
+              >
                 <div style={{...styles.iconCircle, backgroundColor: '#F3E5F5'}}>
                   <svg 
                     width="24" 
@@ -107,11 +217,52 @@ export default function CreatePost() {
                   </svg>
                 </div>
                 <div style={styles.actionText}>
-                  <div style={styles.actionTitle}>Add Video</div>
+                  <div style={styles.actionTitle}>
+                    {uploading ? 'Uploading...' : 'Add Video'}
+                  </div>
                   <div style={styles.actionSubtitle}>Upload a video from your device</div>
                 </div>
               </button>
             </div>
+
+            {/* Media Preview */}
+            {uploadedMedia.length > 0 && (
+              <div style={styles.mediaPreview}>
+                <h3 style={styles.previewTitle}>Uploaded Media:</h3>
+                <div style={styles.mediaGrid}>
+                  {uploadedMedia.map((media, index) => (
+                    <div key={index} style={styles.mediaItem}>
+                      {media.type === 'image' ? (
+                        <img 
+                          src={media.url} 
+                          alt="Upload preview" 
+                          style={styles.previewMedia}
+                        />
+                      ) : (
+                        <video 
+                          src={media.url} 
+                          style={styles.previewMedia}
+                          controls
+                        />
+                      )}
+                      <button 
+                        onClick={() => removeMedia(index)}
+                        style={styles.removeButton}
+                        type="button"
+                      >
+                        ✕
+                      </button>
+                      <div style={styles.mediaInfoBar}>
+                        <span style={styles.mediaType}>{media.type}</span>
+                        <span style={styles.mediaSize}>
+                          {(media.size / 1024 / 1024).toFixed(2)} MB
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Add Event Button */}
             <button type="button" style={styles.eventButton}>
@@ -136,9 +287,29 @@ export default function CreatePost() {
               </div>
             </button>
 
+            {/* Error Message */}
+            {error && (
+              <div style={{
+                color: '#d32f2f',
+                backgroundColor: '#ffebee',
+                padding: '12px',
+                borderRadius: '8px',
+                marginBottom: '16px',
+                fontSize: '14px'
+              }}>
+                {error}
+              </div>
+            )}
+
             {/* Post Button */}
-            <Button variant="primary" size="medium" fullWidth type="submit">
-              Post
+            <Button 
+              variant="primary" 
+              size="medium" 
+              fullWidth 
+              type="submit"
+              disabled={loading || !postContent.trim()}
+            >
+              {loading ? 'Posting...' : 'Post'}
             </Button>
           </form>
         </div>
@@ -269,5 +440,73 @@ const styles = {
     fontSize: '13px',
     color: '#86868b',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  },
+  // Media Preview Styles
+  mediaPreview: {
+    marginBottom: '24px',
+    padding: '20px',
+    backgroundColor: '#f8f9fa',
+    borderRadius: '12px',
+    border: '1px solid #e5e5e5',
+  },
+  previewTitle: {
+    fontSize: '16px',
+    fontWeight: '600',
+    color: '#1d1d1f',
+    marginBottom: '16px',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  },
+  mediaGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: '16px',
+  },
+  mediaItem: {
+    position: 'relative',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    border: '1px solid #e5e5e5',
+  },
+  previewMedia: {
+    width: '100%',
+    height: '150px',
+    objectFit: 'cover',
+    display: 'block',
+  },
+  removeButton: {
+    position: 'absolute',
+    top: '8px',
+    right: '8px',
+    width: '24px',
+    height: '24px',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px',
+    transition: 'background-color 0.2s',
+  },
+  mediaInfoBar: {
+    padding: '8px 12px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    borderTop: '1px solid #e5e5e5',
+  },
+  mediaType: {
+    fontSize: '12px',
+    fontWeight: '500',
+    color: '#666',
+    textTransform: 'uppercase',
+  },
+  mediaSize: {
+    fontSize: '12px',
+    color: '#999',
   },
 };

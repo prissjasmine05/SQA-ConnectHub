@@ -1,11 +1,133 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from './createpost.module.css';
 
 export default function CreatePostPage() {
   const router = useRouter();
   const [postContent, setPostContent] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [uploadedMedia, setUploadedMedia] = useState([]);
+  const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/me', {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          router.push('/create-acc');
+          return;
+        }
+
+        const data = await res.json();
+        
+        // Check if user needs to complete interests
+        if (!data.user.interests || data.user.interests.length === 0) {
+          router.push('/create-acc');
+          return;
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        router.push('/create-acc');
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  const handleFileUpload = async (files, type) => {
+    if (!files || files.length === 0) return;
+
+    setUploading(true);
+    setError('');
+
+    try {
+      const formData = new FormData();
+      Array.from(files).forEach(file => {
+        formData.append('media', file);
+      });
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Upload failed');
+      }
+
+      setUploadedMedia(prev => [...prev, ...data.files]);
+    } catch (err) {
+      console.error('Upload error:', err);
+      setError(err.message || 'Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handlePhotoUpload = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.onchange = (e) => handleFileUpload(e.target.files, 'image');
+    input.click();
+  };
+
+  const handleVideoUpload = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'video/*';
+    input.multiple = true;
+    input.onchange = (e) => handleFileUpload(e.target.files, 'video');
+    input.click();
+  };
+
+  const removeMedia = (index) => {
+    setUploadedMedia(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async () => {
+    if (!postContent.trim() && uploadedMedia.length === 0) {
+      setError('Please write something or add media to post');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ 
+          content: postContent,
+          media: uploadedMedia
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to create post');
+      }
+
+      // Success! Redirect back to profile
+      router.push('/user-profile?refresh=true');
+    } catch (err) {
+      console.error('Create post error:', err);
+      setError(err.message || 'Failed to create post');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -39,7 +161,11 @@ export default function CreatePostPage() {
 
         {/* Media Options */}
         <div className={styles.mediaOptions}>
-          <button className={styles.mediaButton}>
+          <button 
+            className={styles.mediaButton}
+            onClick={handlePhotoUpload}
+            disabled={uploading}
+          >
             <div className={`${styles.iconWrapper} ${styles.iconWrapperBlue}`}>
               <svg 
                 className={`${styles.mediaIcon} ${styles.iconBlue}`}
@@ -56,12 +182,18 @@ export default function CreatePostPage() {
               </svg>
             </div>
             <div className={styles.mediaInfo}>
-              <div className={styles.mediaTitle}>Add Photo</div>
+              <div className={styles.mediaTitle}>
+                {uploading ? 'Uploading...' : 'Add Photo'}
+              </div>
               <div className={styles.mediaDescription}>Upload an image from your device</div>
             </div>
           </button>
 
-          <button className={styles.mediaButton}>
+          <button 
+            className={styles.mediaButton}
+            onClick={handleVideoUpload}
+            disabled={uploading}
+          >
             <div className={`${styles.iconWrapper} ${styles.iconWrapperPurple}`}>
               <svg 
                 className={`${styles.mediaIcon} ${styles.iconPurple}`}
@@ -78,18 +210,66 @@ export default function CreatePostPage() {
               </svg>
             </div>
             <div className={styles.mediaInfo}>
-              <div className={styles.mediaTitle}>Add Video</div>
+              <div className={styles.mediaTitle}>
+                {uploading ? 'Uploading...' : 'Add Video'}
+              </div>
               <div className={styles.mediaDescription}>Upload a video from your device</div>
             </div>
           </button>
         </div>
 
+        {/* Media Preview */}
+        {uploadedMedia.length > 0 && (
+          <div className={styles.mediaPreview}>
+            <h3 className={styles.previewTitle}>Uploaded Media:</h3>
+            <div className={styles.mediaGrid}>
+              {uploadedMedia.map((media, index) => (
+                <div key={index} className={styles.mediaItem}>
+                  {media.type === 'image' ? (
+                    <img 
+                      src={media.url} 
+                      alt="Upload preview" 
+                      className={styles.previewImage}
+                    />
+                  ) : (
+                    <video 
+                      src={media.url} 
+                      className={styles.previewVideo}
+                      controls
+                    />
+                  )}
+                  <button 
+                    onClick={() => removeMedia(index)}
+                    className={styles.removeButton}
+                  >
+                    ✕
+                  </button>
+                  <div className={styles.mediaInfo}>
+                    <span className={styles.mediaType}>{media.type}</span>
+                    <span className={styles.mediaSize}>
+                      {(media.size / 1024 / 1024).toFixed(2)} MB
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className={styles.errorMessage}>
+            {error}
+          </div>
+        )}
+
         {/* Post Button */}
         <button 
-          onClick={() => router.push('/user-profile')}
+          onClick={handleSubmit}
+          disabled={loading || !postContent.trim()}
           className={styles.postButton}
         >
-          Post
+          {loading ? 'Posting...' : 'Post'}
         </button>
       </div>
     </div>

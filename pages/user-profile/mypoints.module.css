@@ -1,227 +1,194 @@
 /* ===== Main Container ===== */
 .mainContainer {
   min-height: 100vh;
-  background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
+  background: #F8F9FE;
+}
+
+/* ===== Header ===== */
+.header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* ===== Modal Card ===== */
-.modalCard {
+  justify-content: space-between;
+  padding: 24px 48px;
   background: #FFFFFF;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 540px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
+  border-bottom: 1px solid #E5E7EB;
 }
 
-/* ===== Close Button ===== */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 18px;
+  height: 18px;
+  background: #000000;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.063rem;
+  font-weight: 700;
+  color: #111827;
+}
+
 .closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background: none;
   border: none;
-  font-size: 2rem;
-  font-weight: 300;
-  color: #9CA3AF;
+  font-size: 1.75rem;
+  color: #6B7280;
   cursor: pointer;
   width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
   transition: color 0.2s;
-  z-index: 10;
 }
 
 .closeButton:hover {
-  color: #6B7280;
-}
-
-/* ===== Header ===== */
-.modalHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 20px 24px;
-  border-bottom: 1px solid #F3F4F6;
-  position: sticky;
-  top: 0;
-  background: #FFFFFF;
-  z-index: 5;
-}
-
-.logoIcon {
-  width: 20px;
-  height: 20px;
-  background: #000000;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.logoText {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0B1021;
+  color: #111827;
 }
 
 /* ===== Content ===== */
-.modalContent {
-  padding: 32px;
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 80px 80px;
 }
 
-.modalTitle {
-  font-size: 1.75rem;
+.pageTitle {
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #0B1021;
-  margin-bottom: 32px;
+  color: #111827;
+  margin-bottom: 48px;
+  letter-spacing: -0.02em;
 }
 
 /* ===== Total Points Section ===== */
 .totalPointsSection {
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
-.pointsHeader {
+.totalPointsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
-.pointsLabel {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #374151;
+.totalPointsLabel {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
 }
 
-.pointsValue {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #0B1021;
+.totalPointsValue {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
 }
 
-.progressBar {
+.progressBarContainer {
   width: 100%;
-  height: 10px;
+  height: 8px;
   background: #E5E7EB;
-  border-radius: 999px;
+  border-radius: 4px;
   overflow: hidden;
   margin-bottom: 12px;
 }
 
-.progressFill {
+.progressBar {
   height: 100%;
-  background: #0B1021;
-  border-radius: 999px;
+  background: #111827;
+  border-radius: 4px;
   transition: width 0.3s ease;
 }
 
 .pointsDescription {
-  font-size: 0.75rem;
+  font-size: 0.938rem;
   color: #6B7280;
   line-height: 1.5;
 }
 
 /* ===== Section ===== */
 .section {
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 
 .section:last-child {
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .sectionTitle {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #0B1021;
-  margin-bottom: 16px;
+  color: #111827;
+  margin-bottom: 24px;
 }
 
 /* ===== Events List ===== */
 .eventsList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .eventItem {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid transparent;
+  gap: 20px;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
-.eventItemGreen {
-  background: #F0FDF4;
-  border-color: #DCFCE7;
-}
-
-.eventItemPink {
-  background: #FDF2F8;
-  border-color: #FCE7F3;
-}
-
-.eventItemYellow {
-  background: #FEFCE8;
-  border-color: #FEF9C3;
-}
-
-.eventIcon {
-  width: 44px;
-  height: 44px;
+.eventIconContainer {
+  width: 56px;
+  height: 56px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-size: 1.5rem;
 }
 
 .eventIconGreen {
-  background: #BBF7D0;
+  background: #E8F5E9;
 }
 
 .eventIconPink {
-  background: #FBCFE8;
+  background: #FCE4EC;
 }
 
-.eventIconYellow {
-  background: #FDE68A;
+.eventIconBeige {
+  background: #FFF9F0;
 }
 
-.eventIcon svg {
-  width: 24px;
-  height: 24px;
+.eventIconContainer svg {
+  width: 28px;
+  height: 28px;
+  color: #374151;
+  stroke-width: 2;
 }
-
-.eventIconGreen svg { color: #15803D; }
-.eventIconPink svg { color: #BE185D; }
-.eventIconYellow svg { color: #A16207; }
 
 .eventInfo {
   flex: 1;
-  min-width: 0;
+  text-align: left;
 }
 
 .eventName {
-  font-size: 0.875rem;
+  font-size: 1.063rem;
   font-weight: 600;
-  color: #0B1021;
-  margin-bottom: 2px;
+  color: #111827;
+  margin-bottom: 4px;
 }
 
 .eventPoints {
-  font-size: 0.75rem;
+  font-size: 0.938rem;
   color: #6B7280;
 }
 
@@ -229,115 +196,141 @@
 .vouchersList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .voucherItem {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border: 1px solid #E5E7EB;
-  border-radius: 12px;
-  transition: all 0.2s;
+  gap: 20px;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
-.voucherItem:hover {
-  border-color: #C4B5FD;
-  background: #FAF5FF;
-}
-
-.voucherInfo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-}
-
-.voucherIcon {
-  width: 44px;
-  height: 44px;
-  background: #EDE9FE;
+.voucherIconContainer {
+  width: 56px;
+  height: 56px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-size: 1.5rem;
 }
 
-.voucherIcon svg {
-  width: 24px;
-  height: 24px;
-  color: #7C3AED;
+.voucherIconBlue {
+  background: #E3F2FD;
 }
 
-.voucherDetails {
+.voucherIconYellow {
+  background: #FFF9E6;
+}
+
+.voucherIconPurple {
+  background: #F3E5F5;
+}
+
+.voucherIconContainer svg {
+  width: 28px;
+  height: 28px;
+  color: #374151;
+  stroke-width: 2;
+}
+
+.voucherInfo {
   flex: 1;
-  min-width: 0;
+  text-align: left;
 }
 
 .voucherName {
-  font-size: 0.875rem;
+  font-size: 1.063rem;
   font-weight: 600;
-  color: #0B1021;
-  margin-bottom: 2px;
+  color: #111827;
+  margin-bottom: 4px;
 }
 
-.voucherCost {
-  font-size: 0.75rem;
+.voucherPoints {
+  font-size: 0.938rem;
   color: #6B7280;
 }
 
 .claimButton {
-  padding: 8px 16px;
+  padding: 10px 28px;
   background: #7C3AED;
   color: #FFFFFF;
   border: none;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.938rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   white-space: nowrap;
 }
 
 .claimButton:hover {
   background: #6D28D9;
+  transform: translateY(-1px);
+}
+
+.claimButton:active {
+  transform: translateY(0);
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 640px) {
-  .modalContent {
-    padding: 24px 20px;
+@media (max-width: 1024px) {
+  .content {
+    padding: 40px 48px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 24px;
   }
 
-  .modalTitle {
-    font-size: 1.5rem;
-    margin-bottom: 24px;
+  .content {
+    padding: 32px 24px 80px;
   }
 
-  .totalPointsSection,
+  .pageTitle {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+
   .section {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
   }
 
-  .voucherItem {
-    padding: 12px;
+  .sectionTitle {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
   }
 
-  .voucherInfo {
-    gap: 10px;
+  .eventIconContainer,
+  .voucherIconContainer {
+    width: 48px;
+    height: 48px;
   }
 
-  .voucherIcon,
-  .eventIcon {
-    width: 40px;
-    height: 40px;
+  .eventIconContainer svg,
+  .voucherIconContainer svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .eventName,
+  .voucherName {
+    font-size: 0.938rem;
+  }
+
+  .eventPoints,
+  .voucherPoints {
+    font-size: 0.875rem;
   }
 
   .claimButton {
-    padding: 6px 12px;
-    font-size: 0.688rem;
+    padding: 8px 20px;
+    font-size: 0.875rem;
   }
 }

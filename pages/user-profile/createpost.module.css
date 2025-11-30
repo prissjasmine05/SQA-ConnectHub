@@ -255,3 +255,125 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Media Preview ===== */
+.mediaPreview {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+}
+
+.previewTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.mediaItem {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+}
+
+.previewImage,
+.previewVideo {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.removeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.removeButton:hover {
+  background: rgba(239, 68, 68, 0.9);
+}
+
+.mediaInfo {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F9FAFB;
+  border-top: 1px solid #E5E7EB;
+}
+
+.mediaType {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6B7280;
+  text-transform: uppercase;
+}
+
+.mediaSize {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+}
+
+/* ===== Error Message ===== */
+.errorMessage {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+/* ===== Disabled States ===== */
+.mediaButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.postButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ===== Mobile Media Preview ===== */
+@media (max-width: 768px) {
+  .mediaGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .previewImage,
+  .previewVideo {
+    height: 120px;
+  }
+
+  .mediaPreview {
+    padding: 16px;
+  }
+}

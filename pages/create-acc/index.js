@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,11 +6,12 @@ import { useRouter } from 'next/router';
 import Button from '../../components/Button';
 import styles from './CreateAccount.module.css';
 
-
 export default function CreateAccount() {
   const router = useRouter();
-  const [currentStep, setCurrentStep] = useState('login'); // 'login', 'signup', 'interests'
-  const [searchTerm, setSearchTerm] = useState('');     
+  const [currentStep, setCurrentStep] = useState('login');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -25,6 +26,39 @@ export default function CreateAccount() {
   });
 
   const [selectedInterests, setSelectedInterests] = useState([]);
+
+  // Check for account switching/adding
+  useEffect(() => {
+    const action = router.query.action;
+    
+    if (action === 'add-account' || action === 'switch-account') {
+      setCurrentStep('login');
+      
+      // Check for target account info
+      const targetAccount = sessionStorage.getItem('ch_target_account');
+      if (targetAccount) {
+        try {
+          const account = JSON.parse(targetAccount);
+          setLoginData(prev => ({
+            ...prev,
+            email: account.email
+          }));
+          
+          // Show message
+          if (action === 'switch-account') {
+            setTimeout(() => {
+              setError(`Switching to ${account.fullName}. Please enter your password.`);
+            }, 500);
+          }
+          
+          // Clear target
+          sessionStorage.removeItem('ch_target_account');
+        } catch (e) {
+          console.error('Error parsing target account:', e);
+        }
+      }
+    }
+  }, [router.query]);
 
   const interests = [
     { id: 1, name: 'Padel', image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=400' },
@@ -47,9 +81,11 @@ export default function CreateAccount() {
     }
   };
 
-  // ... atasnya tetap
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
+
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -57,64 +93,118 @@ export default function CreateAccount() {
         body: JSON.stringify(loginData),
         credentials: 'include'
       });
-      if (!res.ok) throw new Error('Login failed');
-  
-      // cek profil
-      const me = await fetch('/api/auth/me', { credentials: 'include' });
-      const { user } = await me.json();
-  
-      if (user?.onboardingCompleted) {
-        router.replace('/main-page');          // SUDAH onboarding -> langsung Home
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Check if user has interests or completed onboarding
+      const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+      const { user } = await meRes.json();
+
+      if (user?.onboardingCompleted || (user?.interests && user.interests.length > 0)) {
+        router.replace('/main-page');
       } else {
-        setCurrentStep('interests');           // BELUM onboarding -> tampilkan Interests
+        setCurrentStep('interests');
       }
     } catch (err) {
       console.error(err);
-      alert('Login gagal');
+      setError(err.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
-  
+
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
+    // Validation
+    if (signupData.password !== signupData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (signupData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(signupData),
+        body: JSON.stringify({
+          fullname: signupData.fullname,
+          email: signupData.email,
+          password: signupData.password
+        }),
         credentials: 'include'
       });
-      if (!res.ok) throw new Error('Register failed');
-      // user baru -> langsung ke interests
-      setCurrentStep('interests');
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      // Check if new user needs to set interests
+      const meRes = await fetch('/api/auth/me', { credentials: 'include' });
+      const { user } = await meRes.json();
+
+      if (user?.interests && user.interests.length > 0) {
+        router.replace('/main-page');
+      } else {
+        setCurrentStep('interests');
+      }
     } catch (err) {
       console.error(err);
-      alert('Register gagal');
+      setError(err.message || 'Registration failed');
+    } finally {
+      setLoading(false);
     }
   };
-  
-  // saat klik Get Started di step interests, simpan interest ke DB (opsional)
+
   const handleGetStarted = async () => {
+    if (selectedInterests.length === 0) {
+      setError('Please select at least one interest');
+      return;
+    }
+
+    setError('');
+    setLoading(true);
+
     try {
-      // Ambil nama interest dari id
+      // Get selected interest names
       const picked = interests
         .filter(i => selectedInterests.includes(i.id))
         .map(i => i.name);
-  
+
       const res = await fetch('/api/user/save-interests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ interests: picked })
       });
-      if (!res.ok) throw new Error('Failed saving interests');
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to save interests');
+      }
+
       router.replace('/main-page');
     } catch (err) {
       console.error(err);
-      alert('Gagal menyimpan minat');
+      setError(err.message || 'Failed to save interests');
+    } finally {
+      setLoading(false);
     }
   };
-  
-  
 
   const filteredInterests = interests.filter(i =>
     i.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -126,18 +216,15 @@ export default function CreateAccount() {
         <title>Create Account - ConnectHub</title>
       </Head>
 
-      {/* Tambah modifier styles.fullPage saat step interests */}
       <div
-  className={[
-    styles.container,
-    currentStep === 'interests' ? styles.fullPage : ''
-  ].join(' ')}
-  data-step={currentStep} // buat debug di DevTools
->
-        {/* Left Form Section */}
+        className={[
+          styles.container,
+          currentStep === 'interests' ? styles.fullPage : ''
+        ].join(' ')}
+        data-step={currentStep}
+      >
         <div className={styles.leftSection}>
           <div className={styles.formWrapper}>
-            {/* Logo */}
             <div className={styles.logo}>
               <Link href="/">
                 <Image
@@ -154,8 +241,15 @@ export default function CreateAccount() {
               <div className={styles.formContent}>
                 <h1>Welcome Back</h1>
                 <p className={styles.subtitle}>
-                  Don't have an account? <Link href="#" onClick={() => setCurrentStep('signup')}>Sign up</Link>
+                  Don't have an account?{' '}
+                  <Link href="#" onClick={() => setCurrentStep('signup')}>
+                    Sign up
+                  </Link>
                 </p>
+
+
+
+                {error && <div className={styles.error}>{error}</div>}
 
                 <form onSubmit={handleLoginSubmit} className={styles.form}>
                   <div className={styles.formGroup}>
@@ -164,7 +258,9 @@ export default function CreateAccount() {
                       type="email"
                       placeholder="Enter your email"
                       value={loginData.email}
-                      onChange={(e) => setLoginData({...loginData, email: e.target.value})}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, email: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -175,17 +271,23 @@ export default function CreateAccount() {
                       type="password"
                       placeholder="••••••••"
                       value={loginData.password}
-                      onChange={(e) => setLoginData({...loginData, password: e.target.value})}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, password: e.target.value })
+                      }
                       required
                     />
                   </div>
 
-                  <Button type="submit" variant="primary" size="large" fullWidth>
-                    Log In
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="large"
+                    fullWidth
+                    disabled={loading}
+                  >
+                    {loading ? 'Logging in...' : 'Log In'}
                   </Button>
                 </form>
-
-                
               </div>
             )}
 
@@ -193,8 +295,13 @@ export default function CreateAccount() {
               <div className={styles.formContent}>
                 <h1>Create your account</h1>
                 <p className={styles.subtitle}>
-                  Already have an account? <Link href="#" onClick={() => setCurrentStep('login')}>Sign in</Link>
+                  Already have an account?{' '}
+                  <Link href="#" onClick={() => setCurrentStep('login')}>
+                    Sign in
+                  </Link>
                 </p>
+
+                {error && <div className={styles.error}>{error}</div>}
 
                 <form onSubmit={handleSignupSubmit} className={styles.form}>
                   <div className={styles.formGroup}>
@@ -203,7 +310,9 @@ export default function CreateAccount() {
                       type="text"
                       placeholder="Enter your full name"
                       value={signupData.fullname}
-                      onChange={(e) => setSignupData({...signupData, fullname: e.target.value})}
+                      onChange={(e) =>
+                        setSignupData({ ...signupData, fullname: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -214,7 +323,9 @@ export default function CreateAccount() {
                       type="email"
                       placeholder="Enter your email"
                       value={signupData.email}
-                      onChange={(e) => setSignupData({...signupData, email: e.target.value})}
+                      onChange={(e) =>
+                        setSignupData({ ...signupData, email: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -225,7 +336,9 @@ export default function CreateAccount() {
                       type="password"
                       placeholder="••••••••"
                       value={signupData.password}
-                      onChange={(e) => setSignupData({...signupData, password: e.target.value})}
+                      onChange={(e) =>
+                        setSignupData({ ...signupData, password: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -236,26 +349,35 @@ export default function CreateAccount() {
                       type="password"
                       placeholder="••••••••"
                       value={signupData.confirmPassword}
-                      onChange={(e) => setSignupData({...signupData, confirmPassword: e.target.value})}
+                      onChange={(e) =>
+                        setSignupData({
+                          ...signupData,
+                          confirmPassword: e.target.value
+                        })
+                      }
                       required
                     />
                   </div>
 
-                  <Button type="submit" variant="primary" size="large" fullWidth>
-                    Sign Up
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="large"
+                    fullWidth
+                    disabled={loading}
+                  >
+                    {loading ? 'Creating Account...' : 'Sign Up'}
                   </Button>
                 </form>
-
               </div>
             )}
 
-{currentStep === 'interests' && (
+            {currentStep === 'interests' && (
               <div className={styles.interestsContent}>
                 <div className={styles.interestsHeader}>
                   <h1>What are you interested in?</h1>
                   <p>Choose your interest to get personalized content</p>
 
-                  {/* Search bar */}
                   <div className={styles.searchBar}>
                     <span className={styles.searchIcon}>⌕</span>
                     <input
@@ -267,11 +389,17 @@ export default function CreateAccount() {
                   </div>
                 </div>
 
+                {error && <div className={styles.error}>{error}</div>}
+
                 <div className={styles.interestsGrid}>
                   {filteredInterests.map((interest) => (
                     <div
                       key={interest.id}
-                      className={`${styles.interestCard} ${selectedInterests.includes(interest.id) ? styles.selected : ''}`}
+                      className={`${styles.interestCard} ${
+                        selectedInterests.includes(interest.id)
+                          ? styles.selected
+                          : ''
+                      }`}
                       onClick={() => toggleInterest(interest.id)}
                     >
                       <div className={styles.interestThumb}>
@@ -286,8 +414,13 @@ export default function CreateAccount() {
                 </div>
 
                 <div className={styles.interestsFooter}>
-                  <Button variant="primary" size="large" onClick={handleGetStarted}>
-                    Get Started
+                  <Button
+                    variant="primary"
+                    size="large"
+                    onClick={handleGetStarted}
+                    disabled={loading || selectedInterests.length === 0}
+                  >
+                    {loading ? 'Saving...' : 'Get Started'}
                   </Button>
                 </div>
               </div>
@@ -295,11 +428,10 @@ export default function CreateAccount() {
           </div>
         </div>
 
-        {/* Right Image Section — otomatis tersembunyi saat fullPage */}
         <div className={styles.rightSection}>
-          <img 
-            src="https://www.storable.com/wp-content/uploads/2025/02/Storable_Team.png" 
-            alt="Community" 
+          <img
+            src="https://www.storable.com/wp-content/uploads/2025/02/Storable_Team.png"
+            alt="Community"
           />
         </div>
       </div>

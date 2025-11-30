@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ConnectHub Posts Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .post { border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 8px; }
+        .error { color: red; }
+        .success { color: green; }
+        button { margin: 5px; padding: 8px 15px; }
+        textarea { width: 100%; height: 60px; margin: 10px 0; }
+        input[type="file"] { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>ConnectHub Posts Test</h1>
+    
+    <div>
+        <h3>Login First</h3>
+        <input type="email" id="email" placeholder="Email" value="test@gmail.com">
+        <input type="password" id="password" placeholder="Password" value="test123">
+        <button onclick="login()">Login</button>
+        <button onclick="logout()">Logout</button>
+        <div id="auth-status"></div>
+    </div>
+
+    <div>
+        <h3>Create Post</h3>
+        <textarea id="post-content" placeholder="What's on your mind?"></textarea>
+        <input type="file" id="media-files" multiple accept="image/*,video/*">
+        <button onclick="createPost()">Create Post</button>
+        <div id="create-status"></div>
+    </div>
+
+    <div>
+        <h3>Posts Feed</h3>
+        <button onclick="loadPosts()">Load Posts</button>
+        <div id="posts-container"></div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    currentUser = data.user;
+                    document.getElementById('auth-status').innerHTML = 
+                        `<span class="success">Logged in as ${data.user.fullname || data.user.email}</span>`;
+                } else {
+                    document.getElementById('auth-status').innerHTML = 
+                        `<span class="error">Login failed: ${data.message}</span>`;
+                }
+            } catch (error) {
+                document.getElementById('auth-status').innerHTML = 
+                    `<span class="error">Login error: ${error.message}</span>`;
+            }
+        }
+
+        async function logout() {
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                currentUser = null;
+                document.getElementById('auth-status').innerHTML = 
+                    '<span class="success">Logged out</span>';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        }
+
+        async function createPost() {
+            const content = document.getElementById('post-content').value;
+            const files = document.getElementById('media-files').files;
+            
+            if (!content.trim() && files.length === 0) {
+                document.getElementById('create-status').innerHTML = 
+                    '<span class="error">Please write something or add media</span>';
+                return;
+            }
+
+            try {
+                let media = [];
+                
+                // Upload files if any
+                if (files.length > 0) {
+                    const formData = new FormData();
+                    Array.from(files).forEach(file => {
+                        formData.append('media', file);
+                    });
+
+                    const uploadRes = await fetch('/api/upload', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: formData
+                    });
+
+                    if (uploadRes.ok) {
+                        const uploadData = await uploadRes.json();
+                        media = uploadData.files;
+                    }
+                }
+
+                // Create post
+                const res = await fetch('/api/posts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ content, media })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    document.getElementById('create-status').innerHTML = 
+                        '<span class="success">Post created successfully!</span>';
+                    document.getElementById('post-content').value = '';
+                    document.getElementById('media-files').value = '';
+                    loadPosts(); // Reload posts
+                } else {
+                    document.getElementById('create-status').innerHTML = 
+                        `<span class="error">Create post failed: ${data.message}</span>';
+                }
+            } catch (error) {
+                document.getElementById('create-status').innerHTML = 
+                    `<span class="error">Create post error: ${error.message}</span>`;
+            }
+        }
+
+        async function loadPosts() {
+            try {
+                const res = await fetch('/api/posts?limit=10', {
+                    credentials: 'include'
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    const container = document.getElementById('posts-container');
+                    if (data.posts && data.posts.length > 0) {
+                        container.innerHTML = data.posts.map(post => `
+                            <div class="post">
+                                <h4>${post.author?.fullName || post.author?.fullname || 'Unknown User'}</h4>
+                                <p>${post.content}</p>
+                                ${post.media.map(m => 
+                                    m.type === 'image' 
+                                        ? `<img src="${m.url}" style="max-width: 200px; margin: 5px;">`
+                                        : `<video src="${m.url}" controls style="max-width: 200px; margin: 5px;"></video>`
+                                ).join('')}
+                                <div>
+                                    <button onclick="likePost('${post._id}')">
+                                        ❤️ ${post.likes.length}
+                                    </button>
+                                    <span>💬 ${post.comments.length}</span>
+                                    <small>${new Date(post.createdAt).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        container.innerHTML = '<p>No posts found</p>';
+                    }
+                } else {
+                    document.getElementById('posts-container').innerHTML = 
+                        `<span class="error">Load posts failed: ${data.message}</span>`;
+                }
+            } catch (error) {
+                document.getElementById('posts-container').innerHTML = 
+                    `<span class="error">Load posts error: ${error.message}</span>`;
+            }
+        }
+
+        async function likePost(postId) {
+            try {
+                const res = await fetch(`/api/posts/${postId}/like`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (res.ok) {
+                    loadPosts(); // Reload posts to update like count
+                }
+            } catch (error) {
+                console.error('Like error:', error);
+            }
+        }
+
+        // Load posts on page load
+        loadPosts();
+    </script>
+</body>
+</html>

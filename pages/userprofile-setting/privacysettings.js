@@ -1,20 +1,42 @@
 'use client';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './privacysettings.module.css';
 
-export default function PrivacySettings() {
+export default function PrivacySettingsPage() {
   const router = useRouter();
-  
   const [profileVisibility, setProfileVisibility] = useState('public');
   const [friendRequests, setFriendRequests] = useState('everyone');
-  const [activityStatus, setActivityStatus] = useState(true);
+  const [activityStatus, setActivityStatus] = useState(false);
   const [messaging, setMessaging] = useState('everyone');
 
-  const handleSaveChanges = () => {
-    // Save settings logic here
-    alert('Privacy settings saved successfully!');
-  };
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/me', {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          router.push('/create-acc');
+          return;
+        }
+
+        const data = await res.json();
+        
+        // Check if user needs to complete interests
+        if (!data.user.interests || data.user.interests.length === 0) {
+          router.push('/create-acc');
+          return;
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        router.push('/create-acc');
+      }
+    };
+
+    checkAuth();
+  }, [router]);
 
   return (
     <div className={styles.mainContainer}>
@@ -24,7 +46,7 @@ export default function PrivacySettings() {
           onClick={() => router.push('/user-profile/settings')}
           className={styles.closeButton}
         >
-          ×
+          ✕
         </button>
 
         {/* Header */}
@@ -33,19 +55,16 @@ export default function PrivacySettings() {
           <span className={styles.logoText}>ConnectHub</span>
         </div>
 
+        {/* Content */}
         <div className={styles.modalContent}>
           <h1 className={styles.modalTitle}>Privacy Settings</h1>
 
-          {/* Profile Visibility Section */}
+          {/* Profile Visibility */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Profile Visibility</h2>
             
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Public</div>
-                <div className={styles.optionDescription}>Everyone can see your profile</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="profileVisibility"
                 value="public"
@@ -53,15 +72,15 @@ export default function PrivacySettings() {
                 onChange={(e) => setProfileVisibility(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Public</div>
+                <div className={styles.optionDescription}>Everyone can see your profile</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Friends Only</div>
-                <div className={styles.optionDescription}>Only your friends can see your profile</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="profileVisibility"
                 value="friends"
@@ -69,15 +88,15 @@ export default function PrivacySettings() {
                 onChange={(e) => setProfileVisibility(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Friends Only</div>
+                <div className={styles.optionDescription}>Only your friends can see your profile</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Private</div>
-                <div className={styles.optionDescription}>Only you can see your profile</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="profileVisibility"
                 value="private"
@@ -85,20 +104,20 @@ export default function PrivacySettings() {
                 onChange={(e) => setProfileVisibility(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Private</div>
+                <div className={styles.optionDescription}>Only you can see your profile</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
           </div>
 
-          {/* Friend Requests Section */}
+          {/* Friend Requests */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Friend Requests</h2>
             
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Everyone</div>
-                <div className={styles.optionDescription}>Anyone can send you a friend request</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="friendRequests"
                 value="everyone"
@@ -106,71 +125,71 @@ export default function PrivacySettings() {
                 onChange={(e) => setFriendRequests(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Everyone</div>
+                <div className={styles.optionDescription}>Anyone can send you a friend request</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
+              <input 
+                type="radio"
+                name="friendRequests"
+                value="friends-of-friends"
+                checked={friendRequests === 'friends-of-friends'}
+                onChange={(e) => setFriendRequests(e.target.value)}
+                className={styles.radioInput}
+              />
               <div className={styles.optionContent}>
                 <div className={styles.optionTitle}>Friends of Friends</div>
                 <div className={styles.optionDescription}>Only friends of your friends can send you a friend request</div>
               </div>
-              <input
-                type="radio"
-                name="friendRequests"
-                value="friendsOfFriends"
-                checked={friendRequests === 'friendsOfFriends'}
-                onChange={(e) => setFriendRequests(e.target.value)}
-                className={styles.radioInput}
-              />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
+              <input 
+                type="radio"
+                name="friendRequests"
+                value="no-one"
+                checked={friendRequests === 'no-one'}
+                onChange={(e) => setFriendRequests(e.target.value)}
+                className={styles.radioInput}
+              />
               <div className={styles.optionContent}>
                 <div className={styles.optionTitle}>No One</div>
                 <div className={styles.optionDescription}>No one can send you a friend request</div>
               </div>
-              <input
-                type="radio"
-                name="friendRequests"
-                value="noOne"
-                checked={friendRequests === 'noOne'}
-                onChange={(e) => setFriendRequests(e.target.value)}
-                className={styles.radioInput}
-              />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.radioCircle}></div>
             </label>
           </div>
 
-          {/* Activity Status Section */}
+          {/* Activity Status */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Activity Status</h2>
             
             <label className={styles.toggleOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Activity Status</div>
-                <div className={styles.optionDescription}>Show when you're active</div>
-              </div>
-              <input
+              <input 
                 type="checkbox"
                 checked={activityStatus}
                 onChange={(e) => setActivityStatus(e.target.checked)}
                 className={styles.toggleInput}
               />
-              <span className={styles.toggleSwitch}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Activity Status</div>
+                <div className={styles.optionDescription}>Show when you're active</div>
+              </div>
+              <div className={styles.toggleSwitch}></div>
             </label>
           </div>
 
-          {/* Messaging Section */}
+          {/* Messaging */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Messaging</h2>
             
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Everyone</div>
-                <div className={styles.optionDescription}>Anyone can message you</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="messaging"
                 value="everyone"
@@ -178,15 +197,15 @@ export default function PrivacySettings() {
                 onChange={(e) => setMessaging(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Everyone</div>
+                <div className={styles.optionDescription}>Anyone can message you</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
-              <div className={styles.optionContent}>
-                <div className={styles.optionTitle}>Friends Only</div>
-                <div className={styles.optionDescription}>Only your friends can message you</div>
-              </div>
-              <input
+              <input 
                 type="radio"
                 name="messaging"
                 value="friends"
@@ -194,30 +213,34 @@ export default function PrivacySettings() {
                 onChange={(e) => setMessaging(e.target.value)}
                 className={styles.radioInput}
               />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.optionContent}>
+                <div className={styles.optionTitle}>Friends Only</div>
+                <div className={styles.optionDescription}>Only your friends can message you</div>
+              </div>
+              <div className={styles.radioCircle}></div>
             </label>
 
             <label className={styles.radioOption}>
+              <input 
+                type="radio"
+                name="messaging"
+                value="no-one"
+                checked={messaging === 'no-one'}
+                onChange={(e) => setMessaging(e.target.value)}
+                className={styles.radioInput}
+              />
               <div className={styles.optionContent}>
                 <div className={styles.optionTitle}>No One</div>
                 <div className={styles.optionDescription}>No one can message you</div>
               </div>
-              <input
-                type="radio"
-                name="messaging"
-                value="noOne"
-                checked={messaging === 'noOne'}
-                onChange={(e) => setMessaging(e.target.value)}
-                className={styles.radioInput}
-              />
-              <span className={styles.radioCircle}></span>
+              <div className={styles.radioCircle}></div>
             </label>
           </div>
 
           {/* Save Button */}
           <div className={styles.buttonContainer}>
             <button 
-              onClick={handleSaveChanges}
+              onClick={() => router.push('/user-profile/settings')}
               className={styles.saveButton}
             >
               Save Changes

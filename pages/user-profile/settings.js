@@ -1,9 +1,37 @@
-'use client';
-import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from './settings.module.css';
 
 export default function SettingsPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/me', {
+          credentials: 'include'
+        });
+
+        if (!res.ok) {
+          router.push('/create-acc');
+          return;
+        }
+
+        const data = await res.json();
+        
+        // Check if user needs to complete interests
+        if (!data.user.interests || data.user.interests.length === 0) {
+          router.push('/create-acc');
+          return;
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        router.push('/create-acc');
+      }
+    };
+
+    checkAuth();
+  }, [router]);
 
   return (
     <div className={styles.mainContainer}>
@@ -57,13 +85,18 @@ export default function SettingsPage() {
                 </div>
               </button>
 
-              <button className={styles.settingItem}>
+              <button 
+                onClick={() => router.push('/userprofile-setting/changeaccount')}
+                className={`${styles.settingItem} ${styles.settingItemBeige}`}
+              >
                 <div className={styles.iconContainer}>
-                  <span>#</span>
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
                 </div>
                 <div className={styles.settingInfo}>
-                  <div className={styles.settingTitle}>Change Account</div>
-                  <div className={styles.settingDescription}>Manage your account into community</div>
+                  <div className={styles.settingTitle}>Account</div>
+                  <div className={styles.settingDescription}>Manage your account, add another account, or logout</div>
                 </div>
               </button>
             </div>
@@ -75,7 +108,7 @@ export default function SettingsPage() {
             <div className={styles.settingsList}>
               <button 
                 onClick={() => router.push('/userprofile-setting/privacysettings')}
-                className={styles.settingItem}
+                className={`${styles.settingItem} ${styles.settingItemPurple}`}
               >
                 <div className={styles.iconContainer}>
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +123,7 @@ export default function SettingsPage() {
 
               <button 
                 onClick={() => router.push('/userprofile-setting/interest')}
-                className={styles.settingItem}
+                className={`${styles.settingItem} ${styles.settingItemPeach}`}
               >
                 <div className={styles.iconContainer}>
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

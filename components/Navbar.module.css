@@ -97,8 +97,42 @@
     object-fit: cover;
   }
   
-  /* Responsive */
-  @media (max-width: 968px) {
+  /* Auth Buttons (pakai Button component) */
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* User Menu */
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settingsLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.settingsLink:hover {
+  background-color: #e5e7eb;
+}
+
+.settingsLink span {
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
     .container {
       padding: 0 1rem;
     }
@@ -115,11 +149,4 @@
     .navLinks {
       display: none;
     }
-  }
-
-  /* Auth Buttons (pakai Button component) */
-.authButtons {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
   }
